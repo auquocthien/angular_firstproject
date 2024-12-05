@@ -1,0 +1,13 @@
+<div class="w-50 mt-3 mx-auto text-center">
+  <div class="form-group row justify-content-center align-items-center">
+    <input
+      type="text"
+      class="form-control w-50"
+      [(ngModel)]="searchText"
+      placeholder="Enter a task"
+    />
+    <button (click)="handleAddTodo()" class="ml-2 w-25 btn btn-primary">
+      Add Todo
+    </button>
+  </div>
+</div>

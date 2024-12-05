@@ -1,0 +1,10 @@
+<div class="w-100">
+  <input
+    type="text"
+    class="form-control"
+    [value]="title"
+    [(ngModel)]="title"
+    name="edit-todo-input"
+    (blur)="emitValue()"
+  />
+</div>

@@ -1,0 +1,102 @@
+<app-add-todo (addTodoItem)="addItem($event)"></app-add-todo>
+<div
+  class="col-6 mx-auto d-flex justify-content-center align-items-center gap-3 mt-3"
+>
+  <div class="text-center">
+    <input
+      type="radio"
+      name="filter-todo"
+      (change)="filterTodoByStatus($event)"
+      checked
+      value="all"
+      id="all"
+    />
+    <label for="all" class="ms-1">All</label>
+  </div>
+  <div class="text-center">
+    <input
+      type="radio"
+      name="filter-todo"
+      (change)="filterTodoByStatus($event)"
+      value="true"
+      id="completed"
+    />
+    <label for="completed" class="ms-1">Completed ({{ completeCount }})</label>
+  </div>
+  <div class="text-center">
+    <input
+      type="radio"
+      name="filter-todo"
+      (change)="filterTodoByStatus($event)"
+      value="false"
+      id="uncompleted"
+    />
+    <label for="uncompleted" class="ms-1">
+      Uncompleted ({{ filteredTodos.length - completeCount }})
+    </label>
+  </div>
+</div>
+
+@defer{
+<table class="table w-75 mx-auto mt-4 align-middle">
+  <thead>
+    <tr class="text-center table-primary">
+      <th>No.</th>
+      <th>Mask as Done</th>
+      <th>Description</th>
+      <th>Edit todo</th>
+      <th>Delete todo</th>
+    </tr>
+  </thead>
+  <tbody class="fs-6">
+    @for (todo of todos; track todo.id; let ind = $index) {
+    <tr>
+      <td class="text-center">
+        {{ ind + 1 }}
+      </td>
+      <td class="text-center">
+        <input
+          type="checkbox"
+          [checked]="todo.completed"
+          id="todo_{{ todo.id }}"
+          (click)="toggleTodoCompletion(todo.id)"
+        />
+      </td>
+      @if (!isEdit(todo.id)) {
+      <td class="align-center" [appHightlightCompleteTodo]="todo.completed">
+        {{ todo.title | firstLetterUppercase }}
+      </td>
+      } @else {
+      <td>
+        <app-edit-todo
+          [title]="todo.title"
+          (sendValue)="handleEdit($event)"
+        ></app-edit-todo>
+      </td>
+      }
+      <td class="text-center">
+        @if (!todo.completed) {
+        <button class="btn btn-info text-white" (click)="editTodo(todo.id)">
+          {{ !isEdit(todo.id) ? "edit" : "save" }}
+        </button>
+        }
+      </td>
+      <td class="text-center">
+        <button
+          class="btn btn-danger text-white"
+          [ngStyle]="{ 'text-decoration': 'none' }"
+          (click)="deleteTodo(todo.id)"
+        >
+          delete
+        </button>
+      </td>
+    </tr>
+
+    }
+  </tbody>
+</table>
+} @placeholder {
+<p>loading</p>
+} @loading {
+<p>loading.......</p>
+}

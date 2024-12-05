@@ -1,12 +1,16 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, RouterLink } from '@angular/router';
+import { UserComponent } from './components/user/user.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  template: `
+    <div>
+      <app-header />
+      <router-outlet />
+    </div>
+  `,
+  imports: [RouterOutlet, HeaderComponent],
 })
-export class AppComponent {
-  title = 'first_project';
-}
+export class AppComponent {}

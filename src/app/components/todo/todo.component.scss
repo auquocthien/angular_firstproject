@@ -1,0 +1,63 @@
+// .filter {
+//     width: 550px;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+// }
+// div {
+//     width: 120px;
+//     justify-self: center;
+//     display: flex;
+//     align-items: center;
+// }
+// ul {
+//     width: 550px;
+//     border: solid 1px black;
+//     border-radius: 10px;
+//     box-shadow: 4px 4px 8px #4f68b8;
+//     margin: 10px auto;
+//     list-style: none;
+//     font-size: 18px;
+//     padding-right: 40px;
+// }
+
+// li {
+//     display: flex;
+//     align-items: center;
+//     width: 100%;
+//     height: 40px;
+//     margin: 5px 0px;
+// }
+// input[type="checkbox"] {
+//     height: 20px;
+//     width: 20px;
+//     margin-right: 5px;
+// }
+
+// .todo-container {
+//     width: 550px;
+// }
+
+// button {
+//     margin-left: 5px;
+//     border-radius: 5px;
+//     height: 30px;
+//     width: 60px;
+//     border: none;
+//     color: white;
+//     font-size: 16px;
+//     background-color: rgb(40, 158, 255);
+//     &:hover {
+//         cursor: pointer;
+//     }
+//     &:active {
+//         background-color: rgb(0, 139, 253);
+//     }
+
+//     &.delete-btn {
+//         color: white;
+//         margin-right: 5px;
+//         background-color: red;
+//         font-size: 16px;
+//     }
+// }

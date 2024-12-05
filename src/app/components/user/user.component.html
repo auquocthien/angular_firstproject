@@ -1,0 +1,59 @@
+<!-- <label for="username">Username</label>
+<input type="text" id="username" [(ngModel)]="username">
+<label for="password">Password</label>
+<input type="text" id="password" [(ngModel)]="password">
+<span (click)="increase()">+</span><input type="number" id="age" [(ngModel)]="age"><span (click)="deincrease()">-</span>
+<p>username: {{username}}</p>
+<p>password: {{password}}</p>
+<p>age: {{age}}</p> -->
+<div class="center d-flex justify-content-center mt-3">
+  <form
+    [formGroup]="profileForm"
+    (ngSubmit)="handleSubmit()"
+    class="border p-4 rounded w-25"
+  >
+    <h3 class="text-center">ĐĂNG NHẬP</h3>
+    <div class="form-group">
+      <label for="username" class="form-label">Username</label>
+      <input
+        type="text"
+        id="username"
+        formControlName="username"
+        class="form-control w-100"
+      />
+    </div>
+    <div class="mt-2 form-group">
+      <label for="password" class="form-label">Password</label>
+      <input
+        id="password"
+        formControlName="password"
+        class="form-control w-100"
+      />
+    </div>
+    <div class="error-message text-danger mt-2">
+      <span
+        *ngIf="
+          profileForm.get('password')?.invalid &&
+          profileForm.get('password')?.touched
+        "
+      >
+        Password is required
+      </span>
+      <span
+        *ngIf="
+          profileForm.get('username')?.invalid &&
+          profileForm.get('username')?.touched
+        "
+      >
+        Username is required and must be at least 3 characters
+      </span>
+    </div>
+    <button
+      type="submit"
+      class="btn btn-primary mt-3 w-100"
+      [disabled]="!profileForm.valid"
+    >
+      Submit
+    </button>
+  </form>
+</div>
