@@ -1,10 +1,21 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { Observable } from 'rxjs';
+import { IUser } from '../user/models/user.model';
+import { Store } from '@ngrx/store';
+import { selectUser } from '../../store/reducer';
+import { AsyncPipe, JsonPipe, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink],
+  imports: [RouterLink, AsyncPipe, NgIf],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent {}
+export class HeaderComponent {
+  user$: Observable<IUser | null>;
+
+  constructor(store: Store) {
+    this.user$ = store.select(selectUser);
+  }
+}

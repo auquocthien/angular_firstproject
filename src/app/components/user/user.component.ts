@@ -8,6 +8,9 @@ import {
 import { NgIf } from '@angular/common';
 import { UserService } from './services/user.service';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import * as AuthActions from '../../store/action/user.action';
+import { IUser } from './models/user.model';
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
@@ -15,7 +18,14 @@ import { Router } from '@angular/router';
   imports: [ReactiveFormsModule, NgIf],
 })
 export class UserComponent {
-  constructor(private userService: UserService, private router: Router) {}
+  user: IUser | null = null;
+
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private store: Store
+  ) {}
+
   profileForm = new FormGroup({
     username: new FormControl<string>('', [
       Validators.required,
@@ -25,14 +35,27 @@ export class UserComponent {
   });
 
   handleSubmit() {
-    if (this.profileForm.valid) {
-      const { username, password } = this.profileForm.value;
-      if (username && password) {
-        const user = this.userService.login(username, password);
-        if (user) {
-          this.router.navigate(['todo', user.userId]);
+    try {
+      if (this.profileForm.valid) {
+        const { username, password } = this.profileForm.value;
+        if (username && password) {
+          const user$ = this.userService.login(username, password);
+          if (user$) {
+            user$.subscribe((user) => {
+              if (user) {
+                this.user = user;
+                if (this.user) {
+                  this.store.dispatch(AuthActions.login({ user: this.user }));
+                  this.router.navigate(['todo', this.user?.userAccount.userId]);
+                  // this.router.navigate(['']);
+                }
+              }
+            });
+          }
         }
       }
+    } catch (error) {
+      console.log('[handleSubmit]: ', error);
     }
   }
 }

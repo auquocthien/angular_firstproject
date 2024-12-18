@@ -1,0 +1,252 @@
+<div class="container">
+  <form class="form w-50 mx-auto" [formGroup]="userForm">
+    <h4 class="text-center mb-3">{{ "User Info" | uppercase }}</h4>
+    <!-- Name and Email -->
+    <div class="row mb-2">
+      <div class="col-md-6">
+        <input
+          formControlName="name"
+          type="text"
+          class="form-control"
+          id="name"
+          placeholder="Name"
+        />
+        <small
+          *ngIf="userForm.get('name').invalid && userForm.get('name').touched"
+          class="text-danger"
+          >*Name is require</small
+        >
+      </div>
+      <div class="col-md-6">
+        <input
+          formControlName="email"
+          type="email"
+          class="form-control"
+          id="email"
+          placeholder="Email"
+        />
+        <small
+          *ngIf="userForm.get('email').invalid && userForm.get('email').touched"
+          class="text-danger"
+          >*Email is require and must be valid email</small
+        >
+      </div>
+    </div>
+
+    <div class="form-group mb-2">
+      <input
+        formControlName="username"
+        type="text"
+        class="form-control"
+        id="username"
+        placeholder="Username"
+      />
+
+      <app-form-error
+        [control]="userForm.get('username')"
+        [controlName]="'Username'"
+      >
+      </app-form-error>
+    </div>
+
+    <!-- Phone and Website -->
+    <div class="row mb-2">
+      <div class="col-md-6">
+        <input
+          formControlName="phone"
+          type="tel"
+          class="form-control"
+          id="phone"
+          placeholder="Phone"
+        />
+        <small
+          *ngIf="userForm.get('phone').invalid && userForm.get('phone').touched"
+          class="text-danger"
+          >*Phone is require and must be valid</small
+        >
+      </div>
+      <div class="col-md-6">
+        <input
+          formControlName="website"
+          type="url"
+          class="form-control"
+          id="website"
+          placeholder="Website"
+        />
+        <small
+          *ngIf="
+            userForm.get('website').invalid && userForm.get('website').touched
+          "
+          class="text-danger"
+          >*website is require</small
+        >
+      </div>
+    </div>
+
+    <h4 class="text-center mt-5 mb-2">{{ "Address" | uppercase }}</h4>
+
+    <div formGroupName="address">
+      <!-- Street -->
+      <div class="form-group mb-3">
+        <input
+          formControlName="street"
+          type="text"
+          class="form-control"
+          id="street"
+          placeholder="Street"
+        />
+        <small
+          *ngIf="
+            userForm.get('address.street').invalid &&
+            userForm.get('address.street').touched
+          "
+          class="text-danger"
+          >*Street is require</small
+        >
+      </div>
+
+      <!-- Suite and City -->
+      <div class="row mb-2">
+        <div class="col-md-6">
+          <input
+            formControlName="suite"
+            type="text"
+            class="form-control"
+            id="suite"
+            placeholder="Suite"
+          /><small
+            *ngIf="
+              userForm.get('address.suite').invalid &&
+              userForm.get('address.suite').touched
+            "
+            class="text-danger"
+            >*Suite is require</small
+          >
+        </div>
+        <div class="col-md-6">
+          <input
+            formControlName="city"
+            type="text"
+            class="form-control"
+            id="city"
+            placeholder="City"
+          />
+          <small
+            *ngIf="
+              userForm.get('address.city').invalid &&
+              userForm.get('address.city').touched
+            "
+            class="text-danger"
+            >*City is require</small
+          >
+        </div>
+      </div>
+
+      <!-- Zipcode -->
+      <div class="form-group mb-2">
+        <input
+          formControlName="zipcode"
+          type="text"
+          class="form-control"
+          id="zipcode"
+          placeholder="Zipcode"
+        />
+        <small
+          *ngIf="
+            userForm.get('address.zipcode').invalid &&
+            userForm.get('address.zipcode').touched
+          "
+          class="text-danger"
+          >*Zipcode is require</small
+        >
+      </div>
+    </div>
+
+    <h4 class="text-center mt-5 mb-2">{{ "Company Info" | uppercase }}</h4>
+
+    <div formGroupName="company">
+      <!-- Company Name and Catch Phrase -->
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <input
+            formControlName="name"
+            type="text"
+            class="form-control"
+            id="companyName"
+            placeholder="Company Name"
+          />
+          <small
+            *ngIf="
+              userForm.get('company.name').invalid &&
+              userForm.get('company.name').touched
+            "
+            class="text-danger"
+            >*Company name is require</small
+          >
+        </div>
+        <div class="col-md-6">
+          <input
+            formControlName="catchPhrase"
+            type="text"
+            class="form-control"
+            id="catchPhrase"
+            placeholder="Catch Phrase"
+          />
+          <small
+            *ngIf="
+              userForm.get('company.catchPhrase').invalid &&
+              userForm.get('company.catchPhrase').touched
+            "
+            class="text-danger"
+            >*CatchPhrase is require</small
+          >
+        </div>
+      </div>
+
+      <!-- BS -->
+      <div class="mb-2">
+        <div formArrayName="bs">
+          <div
+            class="form-group mb-3"
+            *ngFor="let bs of co_bs.controls; let idx = index"
+          >
+            <div class="d-flex justify-content-between align-items-start">
+              <input
+                type="text"
+                class="w-75 form-control"
+                placeholder="Business Strategy (BS)"
+                [formControlName]="idx"
+              />
+              <button
+                class="btn btn-danger col-2 ms-2"
+                (click)="deleteCo_bs(idx)"
+              >
+                Delete
+              </button>
+            </div>
+            <small
+              *ngIf="bs.invalid && bs.touched"
+              class="text-danger d-block mt-1"
+            >
+              *BS is required
+            </small>
+          </div>
+          <button class="btn btn-primary col-2" (click)="addCo_bs()">
+            Add
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="form-group text-center mt-4">
+      <button
+        type="button"
+        class="btn btn-primary w-100"
+        (click)="submitForm()"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+</div>

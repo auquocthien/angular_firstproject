@@ -1,4 +1,4 @@
-<app-add-todo (addTodoItem)="addItem($event)"></app-add-todo>
+<app-add-todo (addTodoItem)="addTodo($event)"></app-add-todo>
 <div
   class="col-6 mx-auto d-flex justify-content-center align-items-center gap-3 mt-3"
 >
@@ -42,7 +42,7 @@
   <thead>
     <tr class="text-center table-primary">
       <th>No.</th>
-      <th>Mask as Done</th>
+      <th *ngIf="showCompleteCol">Mask as Done</th>
       <th>Description</th>
       <th>Edit todo</th>
       <th>Delete todo</th>
@@ -54,7 +54,7 @@
       <td class="text-center">
         {{ ind + 1 }}
       </td>
-      <td class="text-center">
+      <td class="text-center" *ngIf="showCompleteCol">
         <input
           type="checkbox"
           [checked]="todo.completed"
@@ -76,9 +76,18 @@
       }
       <td class="text-center">
         @if (!todo.completed) {
-        <button class="btn btn-info text-white" (click)="editTodo(todo.id)">
+        <button
+          class="btn btn-info text-white"
+          (click)="editTodo(todo.id)"
+          *ngIf="showCompleteCol; else show"
+        >
           {{ !isEdit(todo.id) ? "edit" : "save" }}
         </button>
+        <ng-template #show>
+          <button class="btn btn-info text-white" (click)="editTodo(todo.id)">
+            {{ !isEdit(todo.id) ? "edit" : "save" }}
+          </button>
+        </ng-template>
         }
       </td>
       <td class="text-center">
@@ -96,7 +105,15 @@
   </tbody>
 </table>
 } @placeholder {
-<p>loading</p>
+<tr>
+  loading
+</tr>
 } @loading {
-<p>loading.......</p>
+<tr>
+  loading.......
+</tr>
 }
+<app-progress-bar
+  [todoAmount]="filteredTodos.length"
+  [completed]="completeCount"
+></app-progress-bar>

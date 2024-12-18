@@ -1,0 +1,9 @@
+<small *ngIf="requiredError" class="text-danger"
+  >*{{ controlName }} is require
+</small>
+<small *ngIf="minLengthError" class="text-danger"
+  >*{{ controlName }} must be at least 5 characters</small
+>
+<small *ngIf="usernameExits" class="text-danger"
+  >*{{ controlName }} is exits</small
+>

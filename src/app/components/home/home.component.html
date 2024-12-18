@@ -1,1 +1,12 @@
-<p>home works!</p>
+<div class="row">
+  <div class="col-4">
+    <app-profile-card (sendUserId)="receive($event)"></app-profile-card>
+  </div>
+  <div class="col-8">
+    <div *ngIf="showTodoTable">
+      <!-- <app-todo [showCompleteCol]="false" [userId]="selectedUser"></app-todo> -->
+      <!-- <p>select {{ selectedUser }}</p> -->
+    </div>
+    <app-add-user-form></app-add-user-form>
+  </div>
+</div>

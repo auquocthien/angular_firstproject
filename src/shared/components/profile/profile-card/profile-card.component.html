@@ -1,0 +1,55 @@
+<div *ngIf="users$ | async as users; else noUsers">
+  <div
+    class="card"
+    *ngFor="let user of users; trackBy: trackByFn"
+    (click)="onSelectUser(user.userAccount.userId)"
+  >
+    <div
+      class="additional"
+      [ngStyle]="getCompletionColor(user.userAccount.userId)"
+    >
+      <div class="user-card">
+        <div class="level center">{{ user.userAccount.role }}</div>
+        <img
+          src="https://i.pinimg.com/736x/ae/5f/a6/ae5fa672304af31729938f28da4cefcd.jpg"
+          class="rounded-circle center border"
+          style="height: 60px"
+        />
+        <div class="points center">
+          {{ getComppletePercent(user.userAccount.userId) | number : "1.0-2" }}
+          %
+        </div>
+      </div>
+    </div>
+    <div class="general">
+      <h4>{{ user.userInfo.name }}</h4>
+      <div class="stats">
+        <div>
+          <div class="title">Awards</div>
+          <i class="fa fa-trophy"></i>
+          <div class="value">2</div>
+        </div>
+        <div>
+          <div class="title">Matches</div>
+          <i class="fa fa-gamepad"></i>
+          <div class="value">27</div>
+        </div>
+        <div>
+          <div class="title">Pals</div>
+          <i class="fa fa-group"></i>
+          <div class="value">123</div>
+        </div>
+        <div>
+          <div class="title">Coffee</div>
+          <i class="fa fa-coffee"></i>
+          <div class="value infinity">∞</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Nếu không có người dùng, hiển thị thông báo "No users available" -->
+<ng-template #noUsers>
+  <p>No users available</p>
+</ng-template>

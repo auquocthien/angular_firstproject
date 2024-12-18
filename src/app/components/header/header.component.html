@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+<nav class="navbar navbar-expand-lg navbar-light bg-primary sticky-top">
   <div class="container-fluid">
     <div
       class="collapse navbar-collapse justify-content-end w-100"
@@ -14,11 +14,25 @@
         <li class="nav-item">
           <a class="nav-link text-white" routerLink="/">Home</a>
         </li>
+
+        <li class="nav-item" *ngIf="user$ | async as user; else noUser">
+          <!-- Kiểm tra nếu userId có giá trị, nếu không có thì chỉ hiển thị /todo -->
+          <a
+            class="nav-link text-white"
+            [routerLink]="
+              user.userAccount.userId
+                ? ['/todo', user.userAccount.userId]
+                : ['/todo']
+            "
+          >
+            Todo
+          </a>
+        </li>
+        <ng-template #noUser>
+          <a class="nav-link text-white" routerLink="/todo">Todo</a>
+        </ng-template>
         <li class="nav-item">
           <a class="nav-link text-white" routerLink="/user">User</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" routerLink="/todo">Todo</a>
         </li>
       </ul>
     </div>
