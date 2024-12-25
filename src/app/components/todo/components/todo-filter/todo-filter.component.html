@@ -1,0 +1,37 @@
+<div
+  class="col-6 mx-auto d-flex justify-content-center align-items-center gap-3 mt-3"
+>
+  <div class="text-center">
+    <input
+      type="radio"
+      name="filter-todo"
+      checked
+      value="all"
+      id="all"
+      (change)="onFilterChange($event)"
+    />
+    <label for="all" class="ms-1">All ({{ totalTodo }})</label>
+  </div>
+  <div class="text-center">
+    <input
+      type="radio"
+      name="filter-todo"
+      value="true"
+      id="completed"
+      (change)="onFilterChange($event)"
+    />
+    <label for="completed" class="ms-1">Completed ({{ completeCount }})</label>
+  </div>
+  <div class="text-center">
+    <input
+      type="radio"
+      name="filter-todo"
+      value="false"
+      id="uncompleted"
+      (change)="onFilterChange($event)"
+    />
+    <label for="uncompleted" class="ms-1">
+      Uncompleted ({{ uncompleteCount }})
+    </label>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<div class="form-group me-3">
+  <input
+    type="text"
+    class="form-control"
+    placeholder="Search"
+    [value]="searchText"
+    (input)="setSearchText($event)"
+  />
+
+  <app-search-popup
+    [isVisible]="showModalSearch"
+    [searchText]="searchText"
+  ></app-search-popup>
+</div>

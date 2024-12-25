@@ -1,0 +1,6 @@
+.search-result-item {
+    cursor: pointer;
+    &:hover {
+        background-color: #ddd;
+    }
+}

@@ -1,0 +1,47 @@
+<div *ngIf="isVisible" class="position-relative">
+  <!-- Popup container -->
+  <div
+    class="container bg-white position-absolute shadow-lg rounded border p-3 mt-2 overflow-auto"
+    style="top: 100%; left: 0; width: 300px; z-index: 1050"
+    [ngStyle]="setHeightSearchResult()"
+  >
+    <!-- User Section -->
+    <div>
+      <p class="text-secondary m-0 fw-bold">User</p>
+      <p
+        *ngIf="userMatches.length == 0"
+        class="text-muted text-center my-2"
+        style="font-size: 0.9rem"
+      >
+        No user found
+      </p>
+      <div class="list-group">
+        <app-search-result-item
+          *ngFor="let user of userMatches"
+          [data]="user"
+        ></app-search-result-item>
+      </div>
+    </div>
+
+    <hr class="my-2" />
+
+    <!-- Todo Section -->
+    <div>
+      <p class="text-secondary m-0 fw-bold">Todo</p>
+      <p
+        *ngIf="todoMatches.length == 0"
+        class="text-muted text-center my-2"
+        style="font-size: 0.9rem"
+      >
+        No todo found
+      </p>
+      <div class="list-group">
+        <app-search-result-item
+          *ngFor="let todo of todoMatches"
+          [data]="todo"
+          [searchText]="searchText"
+        ></app-search-result-item>
+      </div>
+    </div>
+  </div>
+</div>

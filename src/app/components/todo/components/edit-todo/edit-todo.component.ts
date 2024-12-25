@@ -9,11 +9,9 @@ import { FormsModule } from '@angular/forms';
 })
 export class EditTodoComponent {
   @Input() title = '';
-  inputText = '';
   @Output() sendValue = new EventEmitter<string>();
 
   emitValue(): void {
-    console.log(this.inputText);
     this.sendValue.emit(this.title);
   }
 }

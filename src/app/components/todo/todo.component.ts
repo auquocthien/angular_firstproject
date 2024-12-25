@@ -17,10 +17,11 @@ import * as TodoAction from '../../store/action/todo.action';
 import { FormsModule } from '@angular/forms';
 import { AddTodoComponent } from './components/add-todo/add-todo.component';
 import { HightlightCompleteTodoDirective } from './directives/hightlight-complete-todo.directive';
-import { FirstLetterUppercasePipe } from '../../../shared/pipes/first-letter-uppercase/first-letter-uppercase.pipe';
+import { FirstLetterUppercasePipe } from '../../../shared/pipes/first-letter-uppercase.pipe';
 import { EditTodoComponent } from './components/edit-todo/edit-todo.component';
 import { AsyncPipe, NgIf, NgStyle } from '@angular/common';
 import { ProgressBarComponent } from './components/progress/progress-bar/progress-bar.component';
+import { TodoFilterComponent } from './components/todo-filter/todo-filter.component';
 @Component({
   selector: 'app-todo',
   standalone: true,
@@ -33,6 +34,7 @@ import { ProgressBarComponent } from './components/progress/progress-bar/progres
     EditTodoComponent,
     ProgressBarComponent,
     NgIf,
+    TodoFilterComponent,
   ],
   templateUrl: './todo.component.html',
   styleUrl: './todo.component.scss',
@@ -99,8 +101,7 @@ export class TodoComponent implements OnChanges, OnInit {
     ).length;
   }
 
-  filterTodoByStatus(event: Event): void {
-    const option = (event.target as HTMLInputElement).value;
+  filterTodoByStatus(option: string): void {
     if (option === 'all') {
       this.todos = [...this.filteredTodos];
     } else {
@@ -158,12 +159,6 @@ export class TodoComponent implements OnChanges, OnInit {
   }
 
   toggleTodoCompletion(todoId: number): void {
-    // this.todos = this.todos.map((todo) =>
-    //   todo.id === todoId ? { ...todo, completed: !todo.completed } : todo
-    // );
-    // this.filteredTodos = this.filteredTodos.map((todo) =>
-    //   todo.id === todoId ? { ...todo, completed: !todo.completed } : todo
-    // );
     this.store.dispatch(TodoAction.toggleCompleteStatus({ id: todoId }));
     this.updateCompleteCount();
   }

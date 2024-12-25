@@ -5,34 +5,42 @@
       id="navbarNav"
     >
       <!-- Input search -->
-      <div class="form-group me-3">
-        <input type="text" class="form-control" placeholder="Search" />
-      </div>
-
+      <app-search></app-search>
       <!-- Navbar Links -->
       <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link text-white" routerLink="/">Home</a>
+        <li class="nav-item" [routerLinkActive]="'font-weight-bold'">
+          <a class="nav-link text-white" routerLink="">Home</a>
         </li>
 
-        <li class="nav-item" *ngIf="user$ | async as user; else noUser">
+        <li
+          [routerLinkActive]="'font-weight-bold'"
+          class="nav-item"
+          *ngIf="user$ | async as user; else noUser"
+        >
           <!-- Kiểm tra nếu userId có giá trị, nếu không có thì chỉ hiển thị /todo -->
           <a
             class="nav-link text-white"
             [routerLink]="
               user.userAccount.userId
-                ? ['/todo', user.userAccount.userId]
-                : ['/todo']
+                ? ['todo', user.userAccount.userId]
+                : ['todo']
             "
           >
             Todo
           </a>
         </li>
         <ng-template #noUser>
-          <a class="nav-link text-white" routerLink="/todo">Todo</a>
+          <li class="nav-item" [routerLinkActive]="'font-weight-bold'">
+            <a
+              class="nav-link text-white"
+              routerLink="todo"
+              [routerLinkActive]="'font-weight-bold'"
+              >Todo</a
+            >
+          </li>
         </ng-template>
-        <li class="nav-item">
-          <a class="nav-link text-white" routerLink="/user">User</a>
+        <li class="nav-item" [routerLinkActive]="'font-weight-bold'">
+          <a class="nav-link text-white" routerLink="user">User</a>
         </li>
       </ul>
     </div>

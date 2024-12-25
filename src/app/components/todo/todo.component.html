@@ -1,42 +1,10 @@
 <app-add-todo (addTodoItem)="addTodo($event)"></app-add-todo>
-<div
-  class="col-6 mx-auto d-flex justify-content-center align-items-center gap-3 mt-3"
->
-  <div class="text-center">
-    <input
-      type="radio"
-      name="filter-todo"
-      (change)="filterTodoByStatus($event)"
-      checked
-      value="all"
-      id="all"
-    />
-    <label for="all" class="ms-1">All</label>
-  </div>
-  <div class="text-center">
-    <input
-      type="radio"
-      name="filter-todo"
-      (change)="filterTodoByStatus($event)"
-      value="true"
-      id="completed"
-    />
-    <label for="completed" class="ms-1">Completed ({{ completeCount }})</label>
-  </div>
-  <div class="text-center">
-    <input
-      type="radio"
-      name="filter-todo"
-      (change)="filterTodoByStatus($event)"
-      value="false"
-      id="uncompleted"
-    />
-    <label for="uncompleted" class="ms-1">
-      Uncompleted ({{ filteredTodos.length - completeCount }})
-    </label>
-  </div>
-</div>
-
+<app-todo-filter
+  [completeCount]="completeCount"
+  [uncompleteCount]="filteredTodos.length - completeCount"
+  [totalTodo]="filteredTodos.length"
+  (selectedFilter)="filterTodoByStatus($event)"
+></app-todo-filter>
 @defer{
 <table class="table w-75 mx-auto mt-4 align-middle">
   <thead>
@@ -49,6 +17,8 @@
     </tr>
   </thead>
   <tbody class="fs-6">
+    <!-- @for (todo of todos | filterPipe:filterText; track todo.id; let ind =
+    $index) { -->
     @for (todo of todos; track todo.id; let ind = $index) {
     <tr>
       <td class="text-center">
@@ -69,6 +39,7 @@
       } @else {
       <td>
         <app-edit-todo
+          #editTodo
           [title]="todo.title"
           (sendValue)="handleEdit($event)"
         ></app-edit-todo>
