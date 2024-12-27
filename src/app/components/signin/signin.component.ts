@@ -6,11 +6,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { NgIf } from '@angular/common';
-import { UserService } from './services/user.service';
+import { UserService } from '../../../shared/services/user.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as AuthActions from '../../store/action/user.action';
-import { IUser } from './models/user.model';
+import { IUser } from '../../../shared/models/user.model';
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',

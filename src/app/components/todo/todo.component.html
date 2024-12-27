@@ -6,83 +6,31 @@
   (selectedFilter)="filterTodoByStatus($event)"
 ></app-todo-filter>
 @defer{
-<table class="table w-75 mx-auto mt-4 align-middle">
-  <thead>
-    <tr class="text-center table-primary">
-      <th>No.</th>
-      <th *ngIf="showCompleteCol">Mask as Done</th>
-      <th>Description</th>
-      <th>Edit todo</th>
-      <th>Delete todo</th>
-    </tr>
-  </thead>
-  <tbody class="fs-6">
-    <!-- @for (todo of todos | filterPipe:filterText; track todo.id; let ind =
-    $index) { -->
-    @for (todo of todos; track todo.id; let ind = $index) {
-    <tr>
-      <td class="text-center">
-        {{ ind + 1 }}
-      </td>
-      <td class="text-center" *ngIf="showCompleteCol">
-        <input
-          type="checkbox"
-          [checked]="todo.completed"
-          id="todo_{{ todo.id }}"
-          (click)="toggleTodoCompletion(todo.id)"
-        />
-      </td>
-      @if (!isEdit(todo.id)) {
-      <td class="align-center" [appHightlightCompleteTodo]="todo.completed">
-        {{ todo.title | firstLetterUppercase }}
-      </td>
-      } @else {
-      <td>
-        <app-edit-todo
-          #editTodo
-          [title]="todo.title"
-          (sendValue)="handleEdit($event)"
-        ></app-edit-todo>
-      </td>
-      }
-      <td class="text-center">
-        @if (!todo.completed) {
-        <button
-          class="btn btn-info text-white"
-          (click)="editTodo(todo.id)"
-          *ngIf="showCompleteCol; else show"
-        >
-          {{ !isEdit(todo.id) ? "edit" : "save" }}
-        </button>
-        <ng-template #show>
-          <button class="btn btn-info text-white" (click)="editTodo(todo.id)">
-            {{ !isEdit(todo.id) ? "edit" : "save" }}
-          </button>
-        </ng-template>
-        }
-      </td>
-      <td class="text-center">
-        <button
-          class="btn btn-danger text-white"
-          [ngStyle]="{ 'text-decoration': 'none' }"
-          (click)="deleteTodo(todo.id)"
-        >
-          delete
-        </button>
-      </td>
-    </tr>
-
-    }
-  </tbody>
-</table>
+<div class="w-75 mx-auto mt-4 align-middle">
+  <div>
+    <div class="text-center d-flex">
+      <div class="col-sm-1 fw-bold">No.</div>
+      <div class="col-sm-2 fw-bold" *ngIf="showCompleteCol">Mask as Done</div>
+      <div class="col-sm-4 fw-bold">Description</div>
+      <div class="col-sm-2 fw-bold">Edit todo</div>
+      <div class="col-sm-2 fw-bold">Delete todo</div>
+    </div>
+  </div>
+  <div class="fs-6">
+    <div class="w-100">
+      <app-todo-item
+        *ngFor="let todo of todos; let ind = index"
+        [showCompleteCol]="showCompleteCol"
+        [todo]="todo"
+        [index]="ind"
+      ></app-todo-item>
+    </div>
+  </div>
+</div>
 } @placeholder {
-<tr>
-  loading
-</tr>
+<div>loading</div>
 } @loading {
-<tr>
-  loading.......
-</tr>
+<div>loading.......</div>
 }
 <app-progress-bar
   [todoAmount]="filteredTodos.length"

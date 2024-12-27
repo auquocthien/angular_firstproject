@@ -31,6 +31,7 @@ export enum UserRole {
   Admin = 'admin',
   Staff = 'staff',
   Manager = 'manager',
+  Customer = 'customer',
 }
 export interface IUserAccount {
   userId: number;

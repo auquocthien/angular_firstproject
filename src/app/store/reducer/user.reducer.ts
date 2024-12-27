@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import * as AuthActions from '../action/user.action';
-import { IUser } from '../../components/user/models/user.model';
+import { IUser } from '../../../shared/models/user.model';
 
 export const featureKey = 'userReducer';
 

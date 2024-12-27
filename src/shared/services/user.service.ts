@@ -3,7 +3,7 @@ import { IUser, IUserAccount, IUserInfo, UserRole } from '../models/user.model';
 import { BehaviorSubject, delay, filter, map, Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
-import * as UserAction from '../../../store/action/user.action';
+import * as UserAction from '../../app/store/action/user.action';
 
 @Injectable({
   providedIn: 'root',
@@ -49,7 +49,7 @@ export class UserService {
 
   constructor(private httpClient: HttpClient, private store: Store) {}
 
-  login(username: string, password: string): Observable<IUser | undefined> {
+  signin(username: string, password: string): Observable<IUser | undefined> {
     // const userInfo: IUserInfo[] = this.httpClient.get(this.userUrl);
 
     const userAccount = this.usersAccountList.find(

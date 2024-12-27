@@ -1,6 +1,7 @@
 import {
   Directive,
   ElementRef,
+  HostListener,
   Input,
   OnChanges,
   SimpleChanges,
@@ -30,5 +31,13 @@ export class HightlightCompleteTodoDirective implements OnChanges {
       this.el.nativeElement.style.color = 'black';
       this.el.nativeElement.style.backgroundColor = 'white';
     }
+  }
+
+  @HostListener('click') onClick(): void {
+    console.log('elemnet click');
+  }
+
+  public fnCallFromEnternal() {
+    console.log('function inside directive called');
   }
 }

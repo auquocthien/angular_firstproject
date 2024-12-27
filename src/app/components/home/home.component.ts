@@ -4,14 +4,14 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
-import { ProfileCardComponent } from '../../../shared/components/profile/profile-card/profile-card.component';
 import { NgIf } from '@angular/common';
 import { TodoComponent } from '../todo/todo.component';
-import { AddUserFormComponent } from '../user/components/add-user-form/add-user-form.component';
+import { SignupComponent } from '../signup/signup.component';
+import { ProfileCardComponent } from '../../../shared/components/profile/profile-card/profile-card.component';
 
 @Component({
   selector: 'app-home',
-  imports: [ProfileCardComponent, NgIf, AddUserFormComponent],
+  imports: [ProfileCardComponent, NgIf, SignupComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })

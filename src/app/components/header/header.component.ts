@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { Observable } from 'rxjs';
-import { IUser } from '../user/models/user.model';
+import { IUser } from '../../../shared/models/user.model';
 import { Store } from '@ngrx/store';
 import { selectUser } from '../../store/reducer';
 import { AsyncPipe, JsonPipe, NgIf } from '@angular/common';

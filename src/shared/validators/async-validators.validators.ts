@@ -1,5 +1,5 @@
 import { inject } from '@angular/core';
-import { UserService } from '../../app/components/user/services/user.service';
+import { UserService } from '../services/user.service';
 import {
   AbstractControl,
   AsyncValidatorFn,

@@ -16,7 +16,7 @@ import {
   take,
   tap,
 } from 'rxjs';
-import { IUser } from '../../../../app/components/user/models/user.model';
+import { IUser } from '../../../models/user.model';
 import { Store } from '@ngrx/store';
 import * as AppStore from '../../../../app/store/reducer';
 import { AsyncPipe, DecimalPipe, NgFor, NgIf, NgStyle } from '@angular/common';

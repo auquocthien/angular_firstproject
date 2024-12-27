@@ -1,1 +1,55 @@
-<p>todo-item works!</p>
+<div class="d-flex mt-2 align-items-center">
+  <div class="text-center col-sm-1">
+    {{ index + 1 }}
+  </div>
+  <div class="text-center col-sm-2" *ngIf="showCompleteCol">
+    <input
+      type="checkbox"
+      [checked]="todo.completed"
+      id="todo_{{ todo.id }}"
+      (click)="toggleTodoCompletion(todo.id)"
+    />
+  </div>
+  @if (!isEdit(todo.id)) {
+  <div
+    class="align-center col-sm-4"
+    [appHightlightCompleteTodo]="todo.completed"
+  >
+    {{ todo.title | firstLetterUppercase }}
+  </div>
+  } @else {
+  <div class="col-sm-4">
+    <app-edit-todo
+      #editTodo
+      [title]="todo.title"
+      (sendValue)="handleEdit($event)"
+    ></app-edit-todo>
+  </div>
+  }
+  <div class="text-center col-sm-2">
+    @if (!todo.completed) {
+    <button
+      class="btn btn-info text-white"
+      (click)="editTodo(todo.id)"
+      *ngIf="showCompleteCol; else show"
+    >
+      {{ !isEdit(todo.id) ? "edit" : "save" }}
+    </button>
+    <ng-template #show>
+      <button class="btn btn-info text-white" (click)="editTodo(todo.id)">
+        {{ !isEdit(todo.id) ? "edit" : "save" }}
+      </button>
+    </ng-template>
+    }
+  </div>
+  <div class="text-center col-sm-2">
+    <button
+      class="btn btn-danger text-white"
+      [ngStyle]="{ 'text-decoration': 'none' }"
+      (click)="deleteTodo(todo.id)"
+    >
+      delete
+    </button>
+  </div>
+</div>
+<hr />

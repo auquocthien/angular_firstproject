@@ -6,7 +6,7 @@ import {
   OnDestroy,
   SimpleChanges,
 } from '@angular/core';
-import { IUser } from '../../../user/models/user.model';
+import { IUser } from '../../../../../shared/models/user.model';
 import { Todo } from '../../../todo/models/todo.model';
 import {
   debounceTime,

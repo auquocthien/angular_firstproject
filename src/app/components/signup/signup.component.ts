@@ -1,3 +1,4 @@
+import { NgFor, NgIf, UpperCasePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
   FormArray,
@@ -7,10 +8,9 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { CustomAsyncValidators } from '../../../../../shared/validators/async-validators.validators';
-import { UserService } from '../../services/user.service';
-import { NgFor, NgIf, UpperCasePipe } from '@angular/common';
-import { FormErrorComponent } from '../../../../../shared/components/form-error/form-error.component';
+import { FormErrorComponent } from '../../../shared/components/form-error/form-error.component';
+import { UserService } from '../../../shared/services/user.service';
+import { CustomAsyncValidators } from '../../../shared/validators/async-validators.validators';
 
 @Component({
   selector: 'app-add-user-form',
@@ -21,10 +21,10 @@ import { FormErrorComponent } from '../../../../../shared/components/form-error/
     ReactiveFormsModule,
     FormErrorComponent,
   ],
-  templateUrl: './add-user-form.component.html',
-  styleUrls: ['./add-user-form.component.scss'],
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.scss'],
 })
-export class AddUserFormComponent implements OnInit {
+export class SignupComponent implements OnInit {
   userForm!: FormGroup;
 
   constructor(private userService: UserService, private fb: FormBuilder) {}

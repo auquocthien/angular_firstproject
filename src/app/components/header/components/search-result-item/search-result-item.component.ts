@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IUser } from '../../../user/models/user.model';
+import { IUser } from '../../../../../shared/models/user.model';
 import { Todo } from '../../../todo/models/todo.model';
 import { NgIf } from '@angular/common';
 import { Store } from '@ngrx/store';

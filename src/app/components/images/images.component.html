@@ -1,0 +1,9 @@
+<div class="container mt-5">
+  <div class="row g-4">
+    <div class="col-12 col-md-6 col-lg-4" *ngFor="let image of images">
+      <app-image-item [image]="image" #imageItem></app-image-item>
+    </div>
+  </div>
+</div>
+
+<button (click)="showImageItemRef()">show</button>
