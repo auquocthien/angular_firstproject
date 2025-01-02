@@ -1,4 +1,4 @@
-<div class="card shadow">
+<div class="card shadow m-3" (click)="onButtonClick()">
   <img
     [src]="image.download_url"
     class="card-img-top"
@@ -12,7 +12,7 @@
       <strong>Dimensions:</strong> {{ image.width }} x {{ image.height }}<br />
     </p>
     <div class="d-flex flex-end">
-      <button class="btn btn-primary btn-sm">Add to cart</button>
+      <button class="btn btn-primary btn-sm" appHoverButton>Add to cart</button>
     </div>
   </div>
 </div>

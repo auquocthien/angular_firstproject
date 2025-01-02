@@ -1,6 +1,6 @@
 import { NgFor, NgIf, NgStyle } from '@angular/common';
 import { Component, Input, Output } from '@angular/core';
-import { HightlightCompleteTodoDirective } from '../../directives/hightlight-complete-todo.directive';
+import { HightlighCompleteTodoDirective } from '../../directives/hightlight-complete-todo.directive';
 import { FirstLetterUppercasePipe } from '../../../../../shared/pipes/first-letter-uppercase.pipe';
 import { EditTodoComponent } from '../edit-todo/edit-todo.component';
 import { Store } from '@ngrx/store';
@@ -11,7 +11,7 @@ import { Todo } from '../../models/todo.model';
   selector: 'app-todo-item',
   imports: [
     NgStyle,
-    HightlightCompleteTodoDirective,
+    HightlighCompleteTodoDirective,
     FirstLetterUppercasePipe,
     EditTodoComponent,
     NgIf,

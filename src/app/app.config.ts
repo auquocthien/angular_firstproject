@@ -8,6 +8,7 @@ import { provideStore } from '@ngrx/store';
 import { reducers } from './store/reducer/index';
 import { provideEffects } from '@ngrx/effects';
 import { TodoEffect } from './store/effect/todo.effect';
+import { ImageEffect } from './store/effect/image.effect';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,6 +17,6 @@ export const appConfig: ApplicationConfig = {
     provideStore(reducers),
     provideZoneChangeDetection(),
     provideStoreDevtools({ maxAge: 25 }),
-    provideEffects([TodoEffect]),
+    provideEffects([TodoEffect, ImageEffect]),
   ],
 };

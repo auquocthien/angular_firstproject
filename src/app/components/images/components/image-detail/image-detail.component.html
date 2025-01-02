@@ -1,0 +1,52 @@
+<div
+  class="col-9 mx-auto bg-light d-flex gap-3 p-3 border rounded-3 shadow mt-4"
+>
+  <!-- Image Section -->
+  <div class="col-6 text-center">
+    <img
+      [src]="selectedImage.download_url"
+      class="card-img-top img-fluid rounded-3"
+      [alt]="'Image by ' + selectedImage.author"
+    />
+  </div>
+
+  <!-- Details Section -->
+  <div class="col-6 px-3">
+    <div class="d-flex jutify-content-center mb-4">
+      <div class="col-2 d-flex align-items-center gap-2 icon-container">
+        <fa-icon
+          [icon]="faIcon.heart"
+          class="cursor-pointer"
+          style="color: red; cursor: pointer"
+        ></fa-icon>
+        <span class="fw-bold">900</span>
+      </div>
+      <div class="col-2 text-center">
+        <fa-icon [icon]="faIcon.upload" style="cursor: pointer"></fa-icon>
+      </div>
+      <div class="col-2 text-center">
+        <fa-icon [icon]="faIcon.ellipsish" style="cursor: pointer"></fa-icon>
+      </div>
+    </div>
+
+    <h4 class="text-primary">{{ selectedImage.author }}</h4>
+    <strong>Description: </strong>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus
+    nesciunt nulla consequatur dolorum asperiores a eum similique, tenetur
+    veniam placeat nemo fugit hic laudantium aperiam ab quae aliquid fuga
+    quidem.
+    <p class="my-2">
+      <strong>Resolution:</strong> {{ selectedImage.width }}x{{
+        selectedImage.height
+      }}
+    </p>
+    <p>
+      <strong>Cost: </strong
+      ><span class="text-success">{{ "9999" | currency }}</span>
+    </p>
+    <div class="d-flex justify-content-between">
+      <button class="btn btn-primary mt-3" appHoverButton>Add to cart</button>
+      <button class="btn btn-primary mt-3">Buy Now !</button>
+    </div>
+  </div>
+</div>

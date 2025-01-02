@@ -12,4 +12,10 @@ export class ImageService {
   getImages() {
     return this.httpClient.get<Image[]>(this.baseUrl);
   }
+
+  getImageDetail(imageId: string) {
+    const imageDetailUrl = `https://picsum.photos/id/${imageId}/info`;
+
+    return this.httpClient.get<Image>(imageDetailUrl);
+  }
 }

@@ -1,17 +1,17 @@
 import {
-  AfterViewChecked,
   AfterViewInit,
   Component,
-  ElementRef,
   OnInit,
   QueryList,
-  ViewChild,
   ViewChildren,
 } from '@angular/core';
 import { Image } from './model/image.model';
-import { ImageService } from './service/image.service';
-import { JsonPipe, NgFor } from '@angular/common';
+import { NgFor } from '@angular/common';
 import { ImageItemComponent } from './components/image-item/image-item.component';
+import { Store } from '@ngrx/store';
+import * as AppStore from '../../store/reducer';
+import { switchMap, take, tap } from 'rxjs';
+import * as ImageAction from '../../store/action/image.action';
 
 @Component({
   selector: 'app-images',
@@ -24,15 +24,31 @@ export class ImagesComponent implements OnInit, AfterViewInit {
 
   @ViewChildren('imageItem') imageItem: QueryList<ImageItemComponent>;
 
-  constructor(private imageService: ImageService) {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.imageService.getImages().subscribe((images) => {
-      this.images = images;
-    });
+    // this.imageService.getImages().subscribe((images) => {
+    //   this.images = images;
+    // });
+    this.loadImage();
   }
   ngAfterViewInit(): void {
-    this.showImageItemRef();
+    // this.showImageItemRef();
+  }
+
+  loadImage() {
+    this.store
+      .select(AppStore.selectImageLoaded)
+      .pipe(
+        take(1),
+        tap((loaded) => {
+          this.store.dispatch(ImageAction.loadImage({ loaded }));
+        }),
+        switchMap(() => this.store.select(AppStore.selectImage))
+      )
+      .subscribe((images) => {
+        this.images = images;
+      });
   }
 
   showImageItemRef() {

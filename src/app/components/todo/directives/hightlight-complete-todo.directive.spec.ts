@@ -1,8 +1,8 @@
-import { HightlightCompleteTodoDirective } from './hightlight-complete-todo.directive';
+import { HightlighCompleteTodoDirective } from './hightlight-complete-todo.directive';
 
-describe('HightlightCompleteTodoDirective', () => {
+describe('HightlighCompleteTodoDirective', () => {
   it('should create an instance', () => {
-    const directive = new HightlightCompleteTodoDirective();
+    const directive = new HightlighCompleteTodoDirective();
     expect(directive).toBeTruthy();
   });
 });

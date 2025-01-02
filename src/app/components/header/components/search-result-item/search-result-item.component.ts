@@ -5,11 +5,11 @@ import { NgIf } from '@angular/common';
 import { Store } from '@ngrx/store';
 import * as AppStore from '../../../../store/reducer';
 import { filter, map } from 'rxjs';
-import { HightlightSubtextDirective } from '../../../../../shared/directives/hightlight-subtext.directive';
+import { HighlightSubtextDirective } from '../../../../../shared/directives/highlight-subtext.directive';
 
 @Component({
   selector: 'app-search-result-item',
-  imports: [NgIf, HightlightSubtextDirective],
+  imports: [NgIf, HighlightSubtextDirective],
   templateUrl: './search-result-item.component.html',
   styleUrl: './search-result-item.component.scss',
 })

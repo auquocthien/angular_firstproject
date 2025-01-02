@@ -13,11 +13,11 @@ import * as AuthActions from '../../store/action/user.action';
 import { IUser } from '../../../shared/models/user.model';
 @Component({
   selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss'],
+  templateUrl: './signin.component.html',
+  styleUrls: ['./signin.component.scss'],
   imports: [ReactiveFormsModule, NgIf],
 })
-export class UserComponent {
+export class SigninComponent {
   user: IUser | null = null;
 
   constructor(
@@ -39,7 +39,7 @@ export class UserComponent {
       if (this.profileForm.valid) {
         const { username, password } = this.profileForm.value;
         if (username && password) {
-          const user$ = this.userService.login(username, password);
+          const user$ = this.userService.signin(username, password);
           if (user$) {
             user$.subscribe((user) => {
               if (user) {

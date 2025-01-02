@@ -16,7 +16,7 @@ import * as AppStore from '../../store/reducer';
 import * as TodoAction from '../../store/action/todo.action';
 import { FormsModule } from '@angular/forms';
 import { AddTodoComponent } from './components/add-todo/add-todo.component';
-import { HightlightCompleteTodoDirective } from './directives/hightlight-complete-todo.directive';
+import { HightlighCompleteTodoDirective } from './directives/hightlight-complete-todo.directive';
 
 import { NgFor, NgIf } from '@angular/common';
 import { ProgressBarComponent } from './components/progress/progress-bar/progress-bar.component';
@@ -49,8 +49,8 @@ export class TodoComponent implements OnChanges, OnInit {
   user$: Observable<IUser | null>;
   todo$!: Observable<Todo[]>;
 
-  @ViewChild(HightlightCompleteTodoDirective)
-  highlightDirective: HightlightCompleteTodoDirective;
+  @ViewChild(HightlighCompleteTodoDirective)
+  highlightDirective: HightlighCompleteTodoDirective;
 
   constructor(private route: ActivatedRoute, private store: Store<AppState>) {
     this.user$ = this.store.select(AppStore.selectUser);

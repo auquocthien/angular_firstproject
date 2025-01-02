@@ -9,16 +9,16 @@ import {
 @Directive({
   selector: '[appHightlightSubtext]',
 })
-export class HightlightSubtextDirective implements AfterViewInit {
+export class HighlightSubtextDirective implements AfterViewInit {
   @Input() subtext = '';
   pharagraph = '';
 
   constructor(private el: ElementRef, private renderer: Renderer2) {}
   ngAfterViewInit(): void {
-    this.hightlight();
+    this.highlight();
   }
 
-  private hightlight() {
+  private highlight() {
     this.pharagraph = this.el.nativeElement.textContent.trim();
     if (!this.subtext || !this.pharagraph.includes(this.subtext)) {
       return;
