@@ -43,7 +43,7 @@ export class UserService {
       userId: 5,
       username: 'Kamren',
       password: 'blackpanther',
-      role: UserRole.Staff,
+      role: UserRole.Customer,
     },
   ];
 

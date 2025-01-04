@@ -5,6 +5,7 @@ import { PageNotFoundComponent } from '../shared/components/notfound/page-not-fo
 import { ImagesComponent } from './components/images/images.component';
 // import { addtocartGuard } from '../shared/guard/addtocart.guard';
 import { SigninComponent } from './components/signin/signin.component';
+import { CartComponent } from './components/cart/cart.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent, title: 'Home component' },
@@ -15,5 +16,6 @@ export const routes: Routes = [
     loadChildren: () =>
       import('../app/components/images/image.routes').then((m) => m.route),
   },
+  { path: 'cart', component: CartComponent },
   { path: '**', component: PageNotFoundComponent },
 ];

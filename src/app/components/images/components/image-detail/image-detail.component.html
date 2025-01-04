@@ -1,8 +1,8 @@
 <div
-  class="col-9 mx-auto bg-light d-flex gap-3 p-3 border rounded-3 shadow mt-4"
+  class="col-10 mx-auto bg-light d-flex gap-3 p-4 border rounded-3 shadow mt-4"
 >
   <!-- Image Section -->
-  <div class="col-6 text-center">
+  <div class="col-5 text-center">
     <img
       [src]="selectedImage.download_url"
       class="card-img-top img-fluid rounded-3"
@@ -11,42 +11,91 @@
   </div>
 
   <!-- Details Section -->
-  <div class="col-6 px-3">
-    <div class="d-flex jutify-content-center mb-4">
-      <div class="col-2 d-flex align-items-center gap-2 icon-container">
+  <div class="w-100 px-3">
+    <!-- Action Buttons -->
+    <div class="row d-flex justify-content-around align-items-center mb-4">
+      <div
+        class="col-3 d-flex justify-content-center gap-2 border py-2 rounded shadow-sm"
+        style="cursor: pointer"
+      >
         <fa-icon
           [icon]="faIcon.heart"
-          class="cursor-pointer"
           style="color: red; cursor: pointer"
         ></fa-icon>
-        <span class="fw-bold">900</span>
+        <span class="fw-bold">Like 900</span>
       </div>
-      <div class="col-2 text-center">
-        <fa-icon [icon]="faIcon.upload" style="cursor: pointer"></fa-icon>
+      <div
+        class="col-2 d-flex justify-content-center gap-2 border py-2 rounded shadow-sm"
+        style="cursor: pointer"
+      >
+        <fa-icon [icon]="faIcon.upload"></fa-icon>
+        <span class="fw-bold">Share</span>
       </div>
-      <div class="col-2 text-center">
-        <fa-icon [icon]="faIcon.ellipsish" style="cursor: pointer"></fa-icon>
+      <div
+        class="col-2 d-flex justify-content-center gap-2 border py-2 rounded shadow-sm"
+        style="cursor: pointer"
+      >
+        <fa-icon [icon]="faIcon.ellipsish"></fa-icon>
+        <span class="fw-bold">More</span>
+      </div>
+      <div class="col-3 d-flex justify-content-end">
+        <button class="btn btn-primary py-2 px-4">Buy Now!</button>
       </div>
     </div>
 
-    <h4 class="text-primary">{{ selectedImage.author }}</h4>
-    <strong>Description: </strong>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus
-    nesciunt nulla consequatur dolorum asperiores a eum similique, tenetur
-    veniam placeat nemo fugit hic laudantium aperiam ab quae aliquid fuga
-    quidem.
-    <p class="my-2">
-      <strong>Resolution:</strong> {{ selectedImage.width }}x{{
-        selectedImage.height
-      }}
-    </p>
-    <p>
-      <strong>Cost: </strong
-      ><span class="text-success">{{ "9999" | currency }}</span>
-    </p>
-    <div class="d-flex justify-content-between">
-      <button class="btn btn-primary mt-3" appHoverButton>Add to cart</button>
-      <button class="btn btn-primary mt-3">Buy Now !</button>
+    <!-- Image Details -->
+    <div>
+      <h4 class="text-primary mb-3">{{ selectedImage.author }}</h4>
+      <p>
+        <strong>Description:</strong> Lorem ipsum dolor sit amet consectetur
+        adipisicing elit. Repellendus nesciunt nulla consequatur dolorum
+        asperiores.
+      </p>
+      <p class="mb-2">
+        <strong>Resolution:</strong> {{ selectedImage.width }}x{{
+          selectedImage.height
+        }}
+      </p>
+      <p class="mb-2">
+        <strong>Quantity:</strong> {{ selectedImage.quantity }}
+      </p>
+      <p>
+        <strong>Cost:</strong>
+        <span class="text-white bg-success border p-2 rounded">{{
+          selectedImage.price | currency
+        }}</span>
+      </p>
+    </div>
+
+    <!-- Quantity and Add to Cart -->
+    <div class="form-group d-flex align-items-center mt-4 gap-3">
+      <button
+        class="btn btn-outline-secondary"
+        (click)="decreaseQuantity()"
+        style="width: 40px; height: 40px"
+      >
+        -
+      </button>
+      <input
+        type="text"
+        class="form-control text-center"
+        style="max-width: 80px"
+        [(ngModel)]="quantity"
+      />
+      <button
+        class="btn btn-outline-secondary"
+        (click)="increaseQuantity()"
+        style="width: 40px; height: 40px"
+      >
+        +
+      </button>
+      <button
+        class="btn btn-primary text-end"
+        (click)="addImageToCart()"
+        appHoverButton
+      >
+        Add to cart
+      </button>
     </div>
   </div>
 </div>

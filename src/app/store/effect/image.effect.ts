@@ -24,7 +24,7 @@ export class ImageEffect {
 
           return imageService.getImages().pipe(
             map((images) => {
-              return ImageAction.loadImageSuccessful({ images });
+              return ImageAction.loadImageSuccessful({ images: images });
             }),
             catchError((error) => of(ImageAction.loadImageFailure))
           );
