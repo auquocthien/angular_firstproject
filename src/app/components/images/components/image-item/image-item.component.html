@@ -12,7 +12,13 @@
       <strong>Dimensions:</strong> {{ image.width }} x {{ image.height }}<br />
     </p>
     <div class="d-flex flex-end">
-      <button class="btn btn-primary btn-sm" appHoverButton>Add to cart</button>
+      <button
+        class="btn btn-primary btn-sm"
+        appHoverButton
+        (click)="addItemToCart($event)"
+      >
+        Add to cart
+      </button>
     </div>
   </div>
 </div>

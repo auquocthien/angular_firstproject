@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { NgIf } from '@angular/common';
-import { UserService } from '../../../shared/services/user.service';
+import { AuthService } from '../../../shared/services/auth.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as AuthActions from '../../store/action/user.action';
@@ -21,7 +21,7 @@ export class SigninComponent {
   user: IUser | null = null;
 
   constructor(
-    private userService: UserService,
+    private AuthService: AuthService,
     private router: Router,
     private store: Store
   ) {}
@@ -39,7 +39,7 @@ export class SigninComponent {
       if (this.profileForm.valid) {
         const { username, password } = this.profileForm.value;
         if (username && password) {
-          const user$ = this.userService.signin(username, password);
+          const user$ = this.AuthService.signin(username, password);
           if (user$) {
             user$.subscribe((user) => {
               if (user) {

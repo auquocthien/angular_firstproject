@@ -12,7 +12,7 @@
             />
           </div>
           <div class="ms-3">
-            <h5>Iphone 11 pro</h5>
+            <h5>Iphone 11 pro {{ item.id }}</h5>
             <p class="small mb-0">
               Resolution: {{ imageDetail.width }}x{{ imageDetail.height }}
             </p>
@@ -28,7 +28,7 @@
             -
           </button>
 
-          <h5 class="fw-normal mb-0">{{ itemQuantity }}</h5>
+          <h5 class="fw-normal mb-0">{{ item.quantity }}</h5>
 
           <button
             class="btn btn-outline-secondary"
@@ -51,8 +51,8 @@
     <input
       type="checkbox"
       style="width: 18px; height: 18px"
-      (click)="onSelectItem()"
-      [checked]="isSelected"
+      (change)="onSelectItem()"
+      [(ngModel)]="isSelected"
     />
   </div>
 </div>

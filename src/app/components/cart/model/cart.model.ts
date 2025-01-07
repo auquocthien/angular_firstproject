@@ -11,3 +11,8 @@ export interface Cart {
   totalAmount: number;
   totalQuantity: number;
 }
+
+export interface FilteredList {
+  key: string;
+  items: CartItem[];
+}

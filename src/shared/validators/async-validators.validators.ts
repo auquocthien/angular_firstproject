@@ -1,5 +1,5 @@
 import { inject } from '@angular/core';
-import { UserService } from '../services/user.service';
+import { AuthService } from '../services/auth.service';
 import {
   AbstractControl,
   AsyncValidatorFn,
@@ -9,11 +9,11 @@ import {
 import { map, Observable } from 'rxjs';
 
 export class CustomAsyncValidators {
-  static checkUsername(userService: UserService): AsyncValidatorFn {
+  static checkUsername(AuthService: AuthService): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors> => {
-      return userService
-        .checkUserNameExits(control.value)
-        .pipe(map((result) => (result ? { usernameExits: true } : null)));
+      return AuthService.checkUserNameExits(control.value).pipe(
+        map((result) => (result ? { usernameExits: true } : null))
+      );
     };
   }
 }

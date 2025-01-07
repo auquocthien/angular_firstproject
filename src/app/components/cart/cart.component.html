@@ -1,9 +1,9 @@
-<section class="h-100 h-custom" style="background-color: #eee">
+<section class="h-100" style="background-color: #eee; min-height: 100vh">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col">
         <div class="card">
-          <div class="card-body p-4">
+          <div class="card-body p-4" style="min-height: 80vh">
             <div class="row">
               <div class="col-lg-7">
                 <div
@@ -18,15 +18,15 @@
                   <div
                     class="d-flex justify-content-between gap-2 align-items-center"
                   >
-                    <p class="mb-0" style="width: 100px">
-                      <span class="text-muted">Sort by:</span>
-                    </p>
+                    <span class="text-muted" style="width: 100px"
+                      >Sort by:</span
+                    >
                     <select
                       name="cartFilter"
                       id="cfilter"
                       class="form-select form-select-sm"
-                      [(ngModel)]="condition"
                       (change)="filterCartItem()"
+                      [(ngModel)]="condition"
                     >
                       <option value="none" selected>None</option>
                       <option value="price">Price</option>
@@ -46,12 +46,43 @@
                     (click)="onSelectAllItem()"
                   />
                 </div>
-                <app-cart-item
-                  #cartItem
-                  *ngFor="let item of cart.items"
-                  [item]="item"
-                  (emitSelectChange)="toggleSelectAll($event)"
-                ></app-cart-item>
+
+                <div
+                  *ngIf="
+                    condition == 'date' || condition == 'author';
+                    else noCondition
+                  "
+                >
+                  <div *ngFor="let item of filteredList">
+                    <div class="pl-2 fw-bold my-2">{{ item.key | date }}</div>
+                    <app-cart-item
+                      #cartItem
+                      *ngFor="let i of item.items; let idx = index"
+                      [item]="i"
+                    ></app-cart-item>
+                  </div>
+                </div>
+
+                <ng-template #noCondition>
+                  <app-cart-item
+                    #cartItem
+                    *ngFor="
+                      let item of cart.items;
+                      let idx = index;
+                      trackBy: trackByItem
+                    "
+                    [item]="item"
+                    (emitSelectChange)="toggleSelectAll($event)"
+                    (emitQuantityChange)="calculateCartAmount()"
+                  ></app-cart-item>
+                </ng-template>
+
+                <!-- <app-skeleton
+                  [classes]="['shadow', 'bg-secondary']"
+                  [styles]="{ height: '85px' }"
+                >
+                </app-skeleton> -->
+
                 <div class="text-end col-lg-11" *ngIf="isDisplayDeleteButton">
                   <button class="btn btn-danger" (click)="deleteCartItem()">
                     Delete
@@ -59,7 +90,10 @@
                 </div>
               </div>
               <div class="col-lg-5 mt-2">
-                <div class="card bg-primary text-white rounded-3">
+                <div
+                  class="card bg-primary text-white rounded-3"
+                  style="position: fixed; width: 428px"
+                >
                   <div class="card-body">
                     <div
                       class="d-flex justify-content-between align-items-center mb-4"
@@ -166,8 +200,8 @@
                     <hr class="my-4" />
 
                     <div class="d-flex justify-content-between">
-                      <p class="mb-2">Subtotal</p>
-                      <p class="mb-2">{{ cart.totalAmount | currency }}</p>
+                      <p class="mb-2">Total</p>
+                      <p class="mb-2">{{ amountOfSelectItem | currency }}</p>
                     </div>
 
                     <div class="d-flex justify-content-between">
@@ -177,10 +211,17 @@
 
                     <div class="d-flex justify-content-between mb-4">
                       <p class="mb-2">Total (Incl. taxes)</p>
-                      <p class="mb-2">{{ cart.totalAmount | currency }}</p>
+                      <p class="mb-2">{{ amountOfSelectItem | currency }}</p>
                     </div>
 
-                    <button type="button" class="btn btn-dark">Checkout</button>
+                    <button
+                      type="button"
+                      class="btn btn-dark"
+                      [disabled]="!isDisplayDeleteButton"
+                      (click)="redirectToOrderPage()"
+                    >
+                      Checkout
+                    </button>
                   </div>
                 </div>
               </div>

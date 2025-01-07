@@ -1,0 +1,23 @@
+.skeleton {
+    position: relative;
+    display: block;
+    background-color: #e0e0e0; // Màu nền cho skeleton loader
+    border-radius: 4px;
+    opacity: 0.7;
+    overflow: hidden; // Ẩn phần ngoài vùng hiển thị
+
+    // Thiết lập một lớp nền gradient để tạo hiệu ứng chuyển động
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%; // Đảm bảo hiệu ứng kéo dài từ trái qua phải
+    animation: loading 3.5s infinite ease-in-out;
+}
+
+// Hiệu ứng loading di chuyển từ trái sang phải
+@keyframes loading {
+    0% {
+        background-position: 200% 0; // Bắt đầu từ ngoài bên trái
+    }
+    100% {
+        background-position: -200% 0; // Kết thúc ở ngoài bên phải
+    }
+}

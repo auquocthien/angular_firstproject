@@ -8,7 +8,7 @@ import * as UserAction from '../../app/store/action/user.action';
 @Injectable({
   providedIn: 'root',
 })
-export class UserService {
+export class AuthService {
   users$: Observable<IUser>[] = [];
 
   userUrl: string = 'https://jsonplaceholder.typicode.com/users';

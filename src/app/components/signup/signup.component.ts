@@ -9,7 +9,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { FormErrorComponent } from '../../../shared/components/form-error/form-error.component';
-import { UserService } from '../../../shared/services/user.service';
+import { AuthService } from '../../../shared/services/auth.service';
 import { CustomAsyncValidators } from '../../../shared/validators/async-validators.validators';
 
 @Component({
@@ -27,7 +27,7 @@ import { CustomAsyncValidators } from '../../../shared/validators/async-validato
 export class SignupComponent implements OnInit {
   userForm!: FormGroup;
 
-  constructor(private userService: UserService, private fb: FormBuilder) {}
+  constructor(private AuthService: AuthService, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.userForm = this.fb.group({
@@ -35,7 +35,7 @@ export class SignupComponent implements OnInit {
       username: [
         '',
         [Validators.required, Validators.minLength(5)],
-        [CustomAsyncValidators.checkUsername(this.userService)],
+        [CustomAsyncValidators.checkUsername(this.AuthService)],
       ],
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required, Validators.maxLength(10)]],

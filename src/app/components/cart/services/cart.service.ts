@@ -76,7 +76,6 @@ export class CartService {
           this.store
             .select(AppStore.selectImageDetail(itemId))
             .subscribe((item) => (maxQuantity = item[0].quantity));
-          console.log(maxQuantity);
 
           const newQuantify = i.quantity + (increase ? 1 : -1);
           if (newQuantify > maxQuantity) {
