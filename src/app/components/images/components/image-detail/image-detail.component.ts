@@ -75,6 +75,7 @@ export class ImageDetailComponent implements OnInit {
   addImageToCart() {
     const cartItem: CartItem = {
       id: this.selectedImage.id,
+      imageUrl: this.selectedImage.download_url,
       price: this.selectedImage.price,
       quantity: this.quantity,
       createAt: new Date(),

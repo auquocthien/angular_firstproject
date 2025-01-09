@@ -213,6 +213,15 @@ export class CartComponent implements OnInit, AfterViewInit {
   }
 
   redirectToOrderPage() {
+    const selectItem = this.cartItemCo
+      .map((itemCo) => {
+        if (itemCo.isSelected) {
+          return itemCo.item;
+        }
+        return null;
+      })
+      .filter((item) => item !== null);
+    this.cartService.setSelectedItem(selectItem);
     this.router.navigate(['/order']);
   }
 }

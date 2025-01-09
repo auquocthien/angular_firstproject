@@ -25,8 +25,10 @@ export class ImageItemComponent {
     event.stopPropagation();
     const item: CartItem = {
       id: this.image.id,
+      imageUrl: this.image.download_url,
       price: this.image.price,
       quantity: 1,
+      createAt: new Date(),
     };
 
     this.cartService.addItem(item);

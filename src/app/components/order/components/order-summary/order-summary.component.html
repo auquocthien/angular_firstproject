@@ -1,0 +1,50 @@
+<div class="row d-flex justify-content-center">
+  <div
+    *ngFor="let item of cartItem"
+    class="d-flex justify-content-center"
+    style="cursor: pointer"
+    (click)="toImageDetail(item.id)"
+  >
+    <div class="card mb-3 shadow col-lg-11">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="d-flex flex-row align-items-center">
+            <div>
+              <img
+                [src]="item.imageUrl"
+                class="img-fluid rounded-3"
+                alt="Shopping item"
+                style="width: 65px"
+              />
+            </div>
+            <div class="ms-3">
+              <h5>Iphone 11 pro {{ item.id }}</h5>
+            </div>
+          </div>
+
+          <div>
+            <h5 class="mb-0">{{ item.price * item.quantity | currency }}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="h6 fw-bold">You selected {{ cartItem.length }} items</div>
+  <hr class="my-3" />
+  <div class="col-lg-11 row d-flex justify-content-center">
+    <div class="d-flex justify-content-between w-100">
+      <p class="mb-2 fw-bold">Total</p>
+      <p class="mb-2 h5">{{ totalAmount | currency }}</p>
+    </div>
+
+    <div class="d-flex justify-content-between w-100">
+      <p class="mb-2 fw-bold">Shipping</p>
+      <p class="mb-2 h5">$20.00</p>
+    </div>
+
+    <div class="d-flex justify-content-between mb-4 w-100">
+      <p class="mb-2 fw-bold">Total (Incl. taxes)</p>
+      <p class="mb-2 h5">{{ totalAmount | currency }}</p>
+    </div>
+  </div>
+</div>

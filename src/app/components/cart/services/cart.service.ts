@@ -10,6 +10,31 @@ import * as AppStore from '../../../store/reducer';
 export class CartService {
   private cartSubject: BehaviorSubject<Cart>;
   cart$: Observable<Cart>;
+  selectedItem: CartItem[] = [
+    {
+      id: '1',
+      imageUrl: 'https://picsum.photos/id/1/5000/3333',
+      price: 4,
+      quantity: 1,
+      createAt: new Date('2025-01-01T10:00:00'),
+    },
+
+    {
+      id: '0',
+      imageUrl: 'https://picsum.photos/id/0/5000/3333',
+      price: 86,
+      quantity: 1,
+      createAt: new Date('2025-01-01T10:00:00'),
+    },
+
+    {
+      id: '2',
+      imageUrl: 'https://picsum.photos/id/2/5000/3333',
+      price: 15,
+      quantity: 1,
+      createAt: new Date('2025-01-01T10:00:00'),
+    },
+  ];
 
   constructor(private store: Store) {
     this.cartSubject = new BehaviorSubject<Cart>({
@@ -99,4 +124,12 @@ export class CartService {
   // removeItem(itemId: string) {
   //   this.cart.items = this.cart.items.filter((item) => item.id != itemId);
   // }
+
+  setSelectedItem(items: CartItem[]) {
+    this.selectedItem = items;
+  }
+
+  getSelectedItem() {
+    return this.selectedItem;
+  }
 }

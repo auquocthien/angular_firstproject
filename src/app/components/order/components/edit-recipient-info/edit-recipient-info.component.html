@@ -1,0 +1,131 @@
+<div class="container bg-white border shadow w-100 mt-2 p-3 rounded">
+  <form class="form mx-auto" [formGroup]="receiverForm">
+    <h4 class="mt-5 mb-2">RECEIVER</h4>
+
+    <div class="row">
+      <div class="col-md-6">
+        <input
+          formControlName="name"
+          type="text"
+          class="form-control"
+          id="name"
+          [placeholder]="defaultReceiver.name"
+        />
+        <small
+          *ngIf="
+            receiverForm.get('name').invalid && receiverForm.get('name').touched
+          "
+          class="text-danger"
+          >*Name is require</small
+        >
+      </div>
+      <div class="col-md-6">
+        <input
+          formControlName="phone"
+          type="tel"
+          class="form-control"
+          id="phone"
+          [placeholder]="defaultReceiver.phone"
+        />
+        <small
+          *ngIf="
+            receiverForm.get('phone').invalid &&
+            receiverForm.get('phone').touched
+          "
+          class="text-danger"
+          >*Phone is require and must be valid</small
+        >
+      </div>
+    </div>
+
+    <h4 class="mt-5 mb-2">ADDRESS</h4>
+
+    <div formGroupName="address">
+      <!-- Street -->
+      <div class="form-group mb-2">
+        <input
+          formControlName="street"
+          type="text"
+          class="form-control"
+          id="street"
+          [placeholder]="defaultReceiver.address.street"
+        />
+        <small
+          *ngIf="
+            receiverForm.get('address.street').invalid &&
+            receiverForm.get('address.street').touched
+          "
+          class="text-danger"
+          >*Street is require</small
+        >
+      </div>
+
+      <!-- Suite and City -->
+      <div class="row mb-2">
+        <div class="col-md-6">
+          <input
+            formControlName="suite"
+            type="text"
+            class="form-control"
+            id="suite"
+            [placeholder]="defaultReceiver.address.suite"
+          /><small
+            *ngIf="
+              receiverForm.get('address.suite').invalid &&
+              receiverForm.get('address.suite').touched
+            "
+            class="text-danger"
+            >*Suite is require</small
+          >
+        </div>
+        <div class="col-md-6">
+          <input
+            formControlName="city"
+            type="text"
+            class="form-control"
+            id="city"
+            [placeholder]="defaultReceiver.address.city"
+          />
+          <small
+            *ngIf="
+              receiverForm.get('address.city').invalid &&
+              receiverForm.get('address.city').touched
+            "
+            class="text-danger"
+            >*City is require</small
+          >
+        </div>
+      </div>
+
+      <!-- Zipcode -->
+      <div class="form-group mb-2">
+        <input
+          formControlName="zipcode"
+          type="text"
+          class="form-control"
+          id="zipcode"
+          [placeholder]="defaultReceiver.address.zipcode"
+        />
+        <small
+          *ngIf="
+            receiverForm.get('address.zipcode').invalid &&
+            receiverForm.get('address.zipcode').touched
+          "
+          class="text-danger"
+          >*Zipcode is require</small
+        >
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="form-group text-center mt-4">
+      <button
+        type="button"
+        class="btn btn-primary w-100"
+        (click)="onButtonClick()"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+</div>

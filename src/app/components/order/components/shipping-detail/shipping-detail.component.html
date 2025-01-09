@@ -1,0 +1,110 @@
+<div>
+  <div
+    class="card shadow-sm mb-4"
+    style="cursor: pointer"
+    (click)="showEditModal(true, false)"
+  >
+    <div class="card-body">
+      <h5 class="card-title font-weight-bold">{{ userInfo.name }}</h5>
+      <p class="card-text mb-2">{{ getUserInfo() }}</p>
+    </div>
+  </div>
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center">
+        <p class="mb-0 text-muted">
+          <strong>Payment Method: </strong>
+        </p>
+
+        <div
+          [ngClass]="getSelectedCardStyle('cash')"
+          class="px-2"
+          style="cursor: pointer"
+          #cardInfo
+        >
+          <fa-icon class="fa-2x" [icon]="cash" style="color: #01a70a"></fa-icon>
+        </div>
+        <div
+          [ngClass]="getSelectedCardStyle('mastercard')"
+          class="px-2"
+          id="mastercard"
+          style="cursor: pointer"
+          #cardInfo
+        >
+          <fa-icon
+            class="fa-2x"
+            [icon]="brandIcon.mastercard"
+            style="color: #eb001b"
+            (click)="showEditModal(false, true, 'mastercard')"
+          ></fa-icon>
+        </div>
+
+        <div
+          [ngClass]="getSelectedCardStyle('paypal')"
+          class="px-2"
+          style="cursor: pointer"
+          #cardInfo
+        >
+          <fa-icon
+            class="fa-2x"
+            [icon]="brandIcon.paypal"
+            style="color: #003087"
+            (click)="showEditModal(false, true, 'paypal')"
+          ></fa-icon>
+        </div>
+        <div
+          class="px-2"
+          [ngClass]="getSelectedCardStyle('visa')"
+          style="cursor: pointer"
+          #cardInfo
+        >
+          <fa-icon
+            class="fa-2x"
+            [icon]="brandIcon.visa"
+            style="color: #1a1f71"
+            (click)="showEditModal(false, true, 'visa')"
+          ></fa-icon>
+        </div>
+
+        <!-- <span>{{ paymentMethod | titlecase }}</span> -->
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="showModal">
+    <div
+      class="mt-5 position-fixed"
+      style="
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.7);
+      "
+    >
+      <div
+        class="rounded position-relative col-5 mx-auto mt-5 p-3"
+        style="background-color: #eee"
+      >
+        <button
+          class="btn text-white bg-danger h5 text-center position-absolute"
+          style="top: 25px; right: 17px"
+          (click)="showEditModal(false, false)"
+        >
+          <!-- <fa-icon [icon]="closeIcon"></fa-icon> -->
+          x
+        </button>
+        <app-edit-recipient-info
+          *ngIf="showEditInfo"
+          [defaultReceiver]="userInfo"
+          (emitNewReceiver)="updateReceiver($event)"
+        ></app-edit-recipient-info>
+        <app-edit-card-info
+          *ngIf="showCardInfo"
+          [cardType]="selectedCardType"
+          (emitCardInfo)="updateCardInfo($event)"
+        ></app-edit-card-info>
+      </div>
+    </div>
+  </div>
+</div>

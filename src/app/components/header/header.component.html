@@ -7,7 +7,7 @@
       <!-- Input search -->
       <app-search></app-search>
       <!-- Navbar Links -->
-      <div class="d-flex justify-content-between col-3">
+      <div class="d-flex justify-content-between col-4">
         <button
           class="btn border text-white shadow bg-dark"
           [routerLinkActive]="'font-weight-bold'"
@@ -55,6 +55,13 @@
           (click)="onButtonClick('')"
         >
           User
+        </button>
+        <button
+          class="btn border text-white shadow bg-dark"
+          [routerLinkActive]="'font-weight-bold'"
+          (click)="onButtonClick('order')"
+        >
+          My Order
         </button>
         <div>
           <button
