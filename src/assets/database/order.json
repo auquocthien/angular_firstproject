@@ -1,0 +1,83 @@
+[
+    {
+        "orderId": "ORD001",
+        "items": [
+            {
+                "id": "0",
+                "imageUrl": "https://picsum.photos/id/0/5000/3333",
+                "quantity": 2,
+                "price": 86
+            },
+            {
+                "id": "1",
+                "imageUrl": "https://picsum.photos/id/1/5000/3333",
+                "quantity": 1,
+                "price": 4
+            }
+        ],
+        "createAt": "2025-01-10T10:00:00Z",
+        "updatedAt": "2025-01-10T12:00:00Z",
+        "totalAmount": 400000,
+        "status": "pending",
+        "payment": {
+            "method": "cash"
+        },
+        "note": "Giao hàng trong giờ hành chính",
+        "estimatedDeliveryDate": "2025-01-15T10:00:00Z",
+        "receiver": {
+            "name": "Chelsey Dietrich",
+            "phone": "(254)954-1289",
+            "address": {
+                "street": "Skiles Walks",
+                "suite": "Suite 351",
+                "city": "Roscoeview",
+                "zipcode": "33263",
+                "geo": {
+                    "lat": -31.8129,
+                    "long": 62.5342
+                }
+            }
+        }
+    },
+    {
+        "orderId": "2",
+        "items": [
+            {
+                "id": "3",
+                "imageUrl": "https://picsum.photos/id/3/5000/3333",
+                "quantity": 1,
+                "price": 69
+            }
+        ],
+        "createAt": "2025-01-09T15:30:00Z",
+        "updatedAt": "2025-01-09T16:00:00Z",
+        "totalAmount": 69,
+        "status": "pending",
+        "payment": {
+            "method": "card",
+            "detail": {
+                "cardHolder": "Chelsey Dietrich",
+                "cardType": "visa",
+                "cardNumber": "4111111111111111",
+                "expiryDate": "12/27",
+                "cvv": "123"
+            }
+        },
+        "note": "Liên hệ trước khi giao hàng",
+        "estimatedDeliveryDate": "2025-01-10T14:00:00Z",
+        "receiver": {
+            "name": "Tran Thi B",
+            "phone": "0987654321",
+            "address": {
+                "street": "Skiles Walks",
+                "suite": "Suite 351",
+                "city": "Roscoeview",
+                "zipcode": "33263",
+                "geo": {
+                    "lat": -31.8129,
+                    "long": 62.5342
+                }
+            }
+        }
+    }
+]

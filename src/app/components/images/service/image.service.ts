@@ -58,7 +58,8 @@ export class ImageService {
   }
 
   getImageDetail(imageId: string) {
-    const imageDetailUrl = `https://picsum.photos/id/${imageId}/info`;
+    // const imageDetailUrl = `https://picsum.photos/id/${imageId}/info`;
+    const imageDetailUrl = `https://angular-71209-default-rtdb.firebaseio.com/image.json/${imageId}`;
 
     return this.httpClient.get<Image>(imageDetailUrl);
   }

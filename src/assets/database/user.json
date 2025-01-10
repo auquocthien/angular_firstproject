@@ -1,0 +1,152 @@
+[
+    {
+        "userInfo": {
+            "name": "Leanne Graham",
+            "username": "Bret",
+            "email": "Sincere@april.biz",
+            "phone": "1-770-736-8031 x56442",
+            "website": "hildegard.org",
+            "address": {
+                "street": "Kulas Light",
+                "suite": "Apt. 556",
+                "city": "Gwenborough",
+                "zipcode": "92998-3874",
+                "geo": {
+                    "lat": -37.3159,
+                    "long": 81.1496
+                }
+            },
+            "company": {
+                "name": "Romaguera-Crona",
+                "catchPhrase": "Multi-layered client-server neural-net",
+                "bs": "harness real-time e-markets"
+            }
+        },
+        "userAccount": {
+            "userId": 1,
+            "username": "Bret",
+            "password": "password123",
+            "role": "admin"
+        }
+    },
+    {
+        "userInfo": {
+            "name": "Ervin Howell",
+            "username": "Antonette",
+            "email": "Shanna@melissa.tv",
+            "phone": "010-692-6593 x09125",
+            "website": "anastasia.net",
+            "address": {
+                "street": "Victor Plains",
+                "suite": "Suite 879",
+                "city": "Wisokyburgh",
+                "zipcode": "90566-7771",
+                "geo": {
+                    "lat": -43.9509,
+                    "long": -34.4618
+                }
+            },
+            "company": {
+                "name": "Deckow-Crist",
+                "catchPhrase": "Proactive didactic contingency",
+                "bs": "synergize scalable supply-chains"
+            }
+        },
+        "userAccount": {
+            "userId": 2,
+            "username": "Antonette",
+            "password": "securepass",
+            "role": "manager"
+        }
+    },
+    {
+        "userInfo": {
+            "name": "Clementine Bauch",
+            "username": "Samantha",
+            "email": "Nathan@yesenia.net",
+            "phone": "1-463-123-4447",
+            "website": "ramiro.info",
+            "address": {
+                "street": "Douglas Extension",
+                "suite": "Suite 847",
+                "city": "McKenziehaven",
+                "zipcode": "59590-4157",
+                "geo": {
+                    "lat": -68.6102,
+                    "long": -47.0653
+                }
+            },
+            "company": {
+                "name": "Romaguera-Jacobson",
+                "catchPhrase": "Face to face bifurcated interface",
+                "bs": "e-enable strategic applications"
+            }
+        },
+        "userAccount": {
+            "userId": 3,
+            "username": "Samantha",
+            "password": "mike2024",
+            "role": "staff"
+        }
+    },
+    {
+        "userInfo": {
+            "name": "Patricia Lebsack",
+            "username": "Karianne",
+            "email": "Julianne.OConner@kory.org",
+            "phone": "493-170-9623 x156",
+            "website": "kale.biz",
+            "address": {
+                "street": "Hoeger Mall",
+                "suite": "Apt. 692",
+                "city": "South Elvis",
+                "zipcode": "53919-4257",
+                "geo": {
+                    "lat": 29.4572,
+                    "long": -164.299
+                }
+            },
+            "company": {
+                "name": "Robel-Corkery",
+                "catchPhrase": "Multi-tiered zero tolerance productivity",
+                "bs": "transition cutting-edge web services"
+            }
+        },
+        "userAccount": {
+            "userId": 4,
+            "username": "Karianne",
+            "password": "emilyrocks",
+            "role": "staff"
+        }
+    },
+    {
+        "userInfo": {
+            "name": "Chelsey Dietrich",
+            "username": "Kamren",
+            "email": "Lucio_Hettinger@annie.ca",
+            "phone": "(254)954-1289",
+            "website": "demarco.info",
+            "address": {
+                "street": "Skiles Walks",
+                "suite": "Suite 351",
+                "city": "Roscoeview",
+                "zipcode": "33263",
+                "geo": {
+                    "lat": -31.8129,
+                    "long": 62.5342
+                }
+            },
+            "company": {
+                "name": "Keebler LLC",
+                "catchPhrase": "User-centric fault-tolerant solution",
+                "bs": "revolutionize end-to-end systems"
+            }
+        },
+        "userAccount": {
+            "userId": 5,
+            "username": "Kamren",
+            "password": "blackpanther",
+            "role": "customer"
+        }
+    }
+]
