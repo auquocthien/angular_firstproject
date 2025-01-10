@@ -20,6 +20,7 @@
           [ngClass]="getSelectedCardStyle('cash')"
           class="px-2"
           style="cursor: pointer"
+          (click)="onSelectCash()"
           #cardInfo
         >
           <fa-icon class="fa-2x" [icon]="cash" style="color: #01a70a"></fa-icon>
@@ -69,6 +70,21 @@
         <!-- <span>{{ paymentMethod | titlecase }}</span> -->
       </div>
     </div>
+  </div>
+  <div class="card shadow-sm mt-4" style="cursor: pointer">
+    <div class="card-body">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="note"
+        [(ngModel)]="note"
+      />
+    </div>
+  </div>
+  <div class="form-group text-center mt-4">
+    <button type="button" class="btn btn-primary w-100" (click)="createOrder()">
+      Order
+    </button>
   </div>
 
   <div *ngIf="showModal">

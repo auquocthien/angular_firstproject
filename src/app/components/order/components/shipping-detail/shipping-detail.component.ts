@@ -1,17 +1,14 @@
 import {
-  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  ElementRef,
+  EventEmitter,
   OnInit,
-  QueryList,
-  Renderer2,
-  ViewChildren,
+  Output,
 } from '@angular/core';
 import { IUserInfo } from '../../../../../shared/models/user.model';
 import { Store } from '@ngrx/store';
-import { Payment, PaymentMethod } from '../../model/order.model';
-import { NgClass, NgIf, NgStyle } from '@angular/common';
+import { OrderDetail, Payment, PaymentMethod } from '../../model/order.model';
+import { NgClass, NgIf } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faClose, faMoneyBill1 } from '@fortawesome/free-solid-svg-icons';
 import {
@@ -22,6 +19,7 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import { EditRecipientInfoComponent } from '../edit-recipient-info/edit-recipient-info.component';
 import { EditCardInfoComponent } from '../edit-card-info/edit-card-info.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-shipping-detail',
@@ -31,17 +29,19 @@ import { EditCardInfoComponent } from '../edit-card-info/edit-card-info.componen
     FontAwesomeModule,
     EditRecipientInfoComponent,
     EditCardInfoComponent,
+    FormsModule,
   ],
   templateUrl: './shipping-detail.component.html',
   styleUrl: './shipping-detail.component.scss',
 })
 export class ShippingDetailComponent implements OnInit {
+  @Output() createOrderEmitter: EventEmitter<boolean> = new EventEmitter();
   userInfo: IUserInfo;
+  note: string;
 
   selectedCardType: string = 'cash';
-  selectedCard: Payment;
+  payment: Payment;
 
-  paymentMethods = Object.values(PaymentMethod);
   showEditInfo: boolean = false;
   showCardInfo: boolean = false;
   showModal: boolean = false;
@@ -102,6 +102,11 @@ export class ShippingDetailComponent implements OnInit {
     this.selectedCardType = cardType;
   }
 
+  onSelectCash() {
+    this.payment.method = PaymentMethod.CASH;
+    this.selectedCardType = 'cash';
+  }
+
   updateReceiver(newReceiver: IUserInfo) {
     this.showModal = false;
     this.showEditInfo = false;
@@ -117,7 +122,7 @@ export class ShippingDetailComponent implements OnInit {
 
     if (cardDetail) {
       this.selectedCardType = cardDetail.detail.cardType;
-      this.selectedCard = cardDetail;
+      this.payment = cardDetail;
 
       console.log(this.selectedCardType);
     }
@@ -139,5 +144,9 @@ export class ShippingDetailComponent implements OnInit {
           'border-2': false,
           rounded: false,
         };
+  }
+
+  createOrder() {
+    this.createOrderEmitter.emit(true);
   }
 }

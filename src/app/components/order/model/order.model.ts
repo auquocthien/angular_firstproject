@@ -38,8 +38,6 @@ export interface OrderDetail {
   status: OrderStatus;
   payment: Payment;
   note?: string;
-  location: IGeo;
-  estimatedDeliveryDate: Date;
-  user: IUserInfo;
-  address: IAddress;
+  estimatedDeliveryDate?: Date;
+  receiver: IUserInfo;
 }

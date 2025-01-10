@@ -1,7 +1,9 @@
 <div class="container bg-white border shadow w-100 mt-2 p-3 rounded">
   <form class="mt-4" [formGroup]="cardInfo">
     <div data-mdb-input-init class="form-outline form-white mb-4">
-      <label class="form-label h5" for="typeName">Cardholder's Name</label>
+      <label class="form-label h5" for="typeName">{{
+        "Cardholder's Name" | uppercase
+      }}</label>
       <input
         type="text"
         id="typeName"
@@ -11,32 +13,42 @@
     </div>
 
     <div class="form-outline form-white mb-4">
-      <label class="form-label h5" for="typeText">Card Number</label>
+      <label class="form-label h5" for="typeText">{{
+        "Card Number" | uppercase
+      }}</label>
       <input
         type="text"
         id="typeText"
         class="form-control"
         placeholder="1234 5678 9012 3457"
         formControlName="cardNumber"
+        (keyup)="transformCardNumber()"
+        maxlength="19"
       />
     </div>
 
     <div class="row mb-4">
       <div class="col-md-6">
         <div class="form-outline form-white">
-          <label class="form-label h5" for="typeExp">Expiration</label>
+          <label class="form-label h5" for="typeExp">{{
+            "Expiration" | uppercase
+          }}</label>
           <input
             type="text"
             id="typeExp"
             class="form-control"
             placeholder="MM/YYYY"
             formControlName="expiryDate"
+            maxlength="5"
+            (keyup)="transformExpiryDate()"
           />
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-outline form-white">
-          <label class="form-label h5" for="typeCvv">Cvv</label>
+          <label class="form-label h5" for="typeCvv">{{
+            "Cvv" | uppercase
+          }}</label>
           <input
             type="password"
             id="typeCvv"
