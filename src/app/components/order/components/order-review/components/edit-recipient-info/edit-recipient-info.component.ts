@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { IUserInfo } from '../../../../../shared/models/user.model';
+import { IUserInfo } from '../../../../../../../shared/models/user.model';
 
 @Component({
   selector: 'app-edit-recipient-info',

@@ -60,49 +60,6 @@ export class CartComponent implements OnInit, AfterViewInit {
     this.store.select(AppStore.selectUser).subscribe((user) => {
       this.user = user;
     });
-    // this.cart = {
-    //   id: 'cart1',
-    //   items: [
-    //     {
-    //       id: '1',
-    //       quantity: 2,
-    //       price: 100,
-    //       createAt: new Date('2025-01-01T10:00:00'),
-    //     },
-    //     {
-    //       id: '2',
-    //       quantity: 1,
-    //       price: 200,
-    //       createAt: new Date('2025-01-01T11:00:00'),
-    //     },
-    //     {
-    //       id: '3',
-    //       quantity: 3,
-    //       price: 50,
-    //       createAt: new Date('2025-01-03T12:00:00'),
-    //     },
-    //     {
-    //       id: '4',
-    //       quantity: 5,
-    //       price: 20,
-    //       createAt: new Date('2025-01-04T13:00:00'),
-    //     },
-    //     {
-    //       id: '5',
-    //       quantity: 3,
-    //       price: 50,
-    //       createAt: new Date('2025-01-04T12:00:00'),
-    //     },
-    //     {
-    //       id: '6',
-    //       quantity: 5,
-    //       price: 20,
-    //       createAt: new Date('2025-01-05T13:00:00'),
-    //     },
-    //   ],
-    //   totalAmount: 650,
-    //   totalQuantity: 11,
-    // };
 
     this.originCart = [...this.cart.items];
   }
@@ -222,6 +179,6 @@ export class CartComponent implements OnInit, AfterViewInit {
       })
       .filter((item) => item !== null);
     this.cartService.setSelectedItem(selectItem);
-    this.router.navigate(['/order']);
+    this.router.navigate(['/order/review']);
   }
 }

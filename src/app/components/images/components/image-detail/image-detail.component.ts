@@ -45,14 +45,14 @@ export class ImageDetailComponent implements OnInit {
   ngOnInit(): void {
     this.activeRoute.params.subscribe((data) => {
       const imageId = data['id'];
-      this.store
-        .select(AppStore.selectImageDetail(imageId))
-        .subscribe((images) => {
-          this.selectedImage = images[0];
-        });
-      // this.imageService
-      //   .getImageDetail(imageId)
-      //   .subscribe((image) => (this.selectedImage = image));
+      // this.store
+      //   .select(AppStore.selectImageDetail(imageId))
+      //   .subscribe((images) => {
+      //     this.selectedImage = images[0];
+      //   });
+      this.imageService
+        .getImageDetail(imageId)
+        .subscribe((image) => (this.selectedImage = image));
     });
 
     this.store.select(AppStore.selectUser).subscribe((user) => {

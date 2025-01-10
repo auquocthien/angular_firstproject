@@ -2,11 +2,8 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { TodoComponent } from './components/todo/todo.component';
 import { PageNotFoundComponent } from '../shared/components/notfound/page-not-found/page-not-found.component';
-import { ImagesComponent } from './components/images/images.component';
-// import { addtocartGuard } from '../shared/guard/addtocart.guard';
 import { SigninComponent } from './components/signin/signin.component';
 import { CartComponent } from './components/cart/cart.component';
-import { OrderComponent } from './components/order/order.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent, title: 'Home component' },
@@ -18,6 +15,10 @@ export const routes: Routes = [
       import('../app/components/images/image.routes').then((m) => m.route),
   },
   { path: 'cart', component: CartComponent },
-  { path: 'order', component: OrderComponent },
+  {
+    path: 'order',
+    loadChildren: () =>
+      import('../app/components/order/order.routes').then((m) => m.route),
+  },
   { path: '**', component: PageNotFoundComponent },
 ];

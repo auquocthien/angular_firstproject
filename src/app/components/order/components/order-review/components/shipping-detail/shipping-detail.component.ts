@@ -5,9 +5,13 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { IUserInfo } from '../../../../../shared/models/user.model';
+import { IUserInfo } from '../../../../../../../shared/models/user.model';
 import { Store } from '@ngrx/store';
-import { OrderDetail, Payment, PaymentMethod } from '../../model/order.model';
+import {
+  OrderDetail,
+  Payment,
+  PaymentMethod,
+} from '../../../../model/order.model';
 import { NgClass, NgIf } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faClose, faMoneyBill1 } from '@fortawesome/free-solid-svg-icons';
@@ -20,6 +24,7 @@ import {
 import { EditRecipientInfoComponent } from '../edit-recipient-info/edit-recipient-info.component';
 import { EditCardInfoComponent } from '../edit-card-info/edit-card-info.component';
 import { FormsModule } from '@angular/forms';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-shipping-detail',
@@ -54,7 +59,11 @@ export class ShippingDetailComponent implements OnInit {
     paypal: faCcPaypal,
   };
 
-  constructor(private store: Store, private cd: ChangeDetectorRef) {}
+  constructor(
+    private store: Store,
+    private cd: ChangeDetectorRef,
+    private route: Router
+  ) {}
 
   ngOnInit(): void {
     // this.store.select(AppStore.selectUser).subscribe((user) => {

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { CartItem } from '../../../cart/model/cart.model';
-import { CartService } from '../../../cart/services/cart.service';
+import { CartItem } from '../../../../../cart/model/cart.model';
+import { CartService } from '../../../../../cart/services/cart.service';
 import { CurrencyPipe, NgFor } from '@angular/common';
 import { Router } from '@angular/router';
 

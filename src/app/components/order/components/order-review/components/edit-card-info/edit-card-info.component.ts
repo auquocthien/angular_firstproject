@@ -5,7 +5,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Payment, PaymentMethod } from '../../model/order.model';
+import { Payment, PaymentMethod } from '../../../../model/order.model';
 import { CurrencyPipe, UpperCasePipe } from '@angular/common';
 
 @Component({

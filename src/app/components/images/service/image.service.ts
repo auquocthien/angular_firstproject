@@ -53,13 +53,13 @@ export class ImageService {
     //   })
     // );
     return this.httpClient.get<Image[]>(
-      'https://angular-71209-default-rtdb.firebaseio.com/image.json'
+      'https://angular-71209-default-rtdb.firebaseio.com/images.json'
     );
   }
 
   getImageDetail(imageId: string) {
     // const imageDetailUrl = `https://picsum.photos/id/${imageId}/info`;
-    const imageDetailUrl = `https://angular-71209-default-rtdb.firebaseio.com/image.json/${imageId}`;
+    const imageDetailUrl = `https://angular-71209-default-rtdb.firebaseio.com/images/${imageId}.json`;
 
     return this.httpClient.get<Image>(imageDetailUrl);
   }
