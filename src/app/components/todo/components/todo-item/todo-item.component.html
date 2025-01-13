@@ -10,37 +10,31 @@
       (click)="toggleTodoCompletion(todo.id)"
     />
   </div>
-  @if (!isEdit(todo.id)) {
   <div
     class="align-center col-sm-4"
     [appHightlightCompleteTodo]="todo.completed"
+    *ngIf="!isEdit(todo.id); else editTodo"
   >
     {{ todo.title | firstLetterUppercase }}
   </div>
-  } @else {
-  <div class="col-sm-4">
-    <app-edit-todo
-      #editTodo
-      [title]="todo.title"
-      (sendValue)="handleEdit($event)"
-    ></app-edit-todo>
-  </div>
-  }
+  <ng-template #editTodo>
+    <div class="col-sm-4">
+      <div class="w-100">
+        <input
+          type="text"
+          class="form-control col-sm-4"
+          [(ngModel)]="editText"
+          name="edit-todo-input"
+        />
+      </div>
+    </div>
+  </ng-template>
   <div class="text-center col-sm-2">
-    @if (!todo.completed) {
-    <button
-      class="btn btn-info text-white"
-      (click)="editTodo(todo.id)"
-      *ngIf="showCompleteCol; else show"
-    >
-      {{ !isEdit(todo.id) ? "edit" : "save" }}
-    </button>
-    <ng-template #show>
-      <button class="btn btn-info text-white" (click)="editTodo(todo.id)">
+    <div *ngIf="!todo.completed">
+      <button class="btn btn-info text-white" (click)="onEditTodo(todo.id)">
         {{ !isEdit(todo.id) ? "edit" : "save" }}
       </button>
-    </ng-template>
-    }
+    </div>
   </div>
   <div class="text-center col-sm-2">
     <button

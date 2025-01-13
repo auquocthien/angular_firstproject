@@ -1,25 +1,24 @@
-import { NgFor, NgIf, NgStyle } from '@angular/common';
-import { Component, Input, Output } from '@angular/core';
-import { HightlighCompleteTodoDirective } from '../../directives/hightlight-complete-todo.directive';
+import { NgIf, NgStyle } from '@angular/common';
+import { Component, Input, OnInit } from '@angular/core';
+import { HighlighCompleteTodoDirective } from '../../directives/hightlight-complete-todo.directive';
 import { FirstLetterUppercasePipe } from '../../../../../shared/pipes/first-letter-uppercase.pipe';
-import { EditTodoComponent } from '../edit-todo/edit-todo.component';
 import { Store } from '@ngrx/store';
 import * as TodoAction from '../../../../store/action/todo.action';
-import * as AppStore from '../../../../store/reducer';
 import { Todo } from '../../models/todo.model';
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-todo-item',
   imports: [
     NgStyle,
-    HightlighCompleteTodoDirective,
+    HighlighCompleteTodoDirective,
     FirstLetterUppercasePipe,
-    EditTodoComponent,
     NgIf,
+    FormsModule,
   ],
   templateUrl: './todo-item.component.html',
   styleUrl: './todo-item.component.scss',
 })
-export class TodoItemComponent {
+export class TodoItemComponent implements OnInit {
   editText = '';
   completeCount = 0;
   editAt = 0;
@@ -31,7 +30,11 @@ export class TodoItemComponent {
 
   constructor(private store: Store) {}
 
-  editTodo(todoId: number): void {
+  ngOnInit(): void {
+    this.editText = this.todo.title;
+  }
+
+  onEditTodo(todoId: number): void {
     if (todoId === this.editAt) {
       this.editAt = 0;
 

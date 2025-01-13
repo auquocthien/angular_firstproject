@@ -10,7 +10,7 @@ import {
 @Directive({
   selector: '[appHightlightCompleteTodo]',
 })
-export class HightlighCompleteTodoDirective implements OnChanges {
+export class HighlighCompleteTodoDirective implements OnChanges {
   @Input('appHightlightCompleteTodo') isCompleted: boolean = true;
 
   constructor(private el: ElementRef) {}
