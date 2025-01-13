@@ -26,7 +26,7 @@ export class EditCardInfoComponent implements OnInit {
       cardHolder: ['', [Validators.required]],
       cardNumber: [
         '',
-        [Validators.required, Validators.pattern('^[0-9]{13,19}$')],
+        [Validators.required, Validators.pattern('^(\\d{4} ?){3}\\d{1,7}$')],
       ],
       expiryDate: ['', [Validators.required]],
       cvv: ['', [Validators.required, Validators.pattern('^[0-9]{3,4}$')]],

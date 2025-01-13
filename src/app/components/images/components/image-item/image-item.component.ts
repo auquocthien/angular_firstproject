@@ -5,6 +5,7 @@ import { HoverButtonDirective } from '../../../../../shared/directives/hover-but
 import { Router } from '@angular/router';
 import { CartService } from '../../../cart/services/cart.service';
 import { CartItem } from '../../../cart/model/cart.model';
+import { ToasterService } from '../../../../../shared/services/toaster.service';
 
 @Component({
   selector: 'app-image-item',
@@ -15,7 +16,11 @@ import { CartItem } from '../../../cart/model/cart.model';
 export class ImageItemComponent {
   @Input() image: Image;
 
-  constructor(private router: Router, private cartService: CartService) {}
+  constructor(
+    private router: Router,
+    private cartService: CartService,
+    private toaster: ToasterService
+  ) {}
 
   onButtonClick() {
     this.router.navigate(['images/image', this.image.id]);
@@ -30,6 +35,8 @@ export class ImageItemComponent {
       quantity: 1,
       createAt: new Date(),
     };
+
+    this.toaster.success('add item to cart success');
 
     this.cartService.addItem(item);
   }

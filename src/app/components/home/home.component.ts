@@ -6,12 +6,11 @@ import {
 } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { TodoComponent } from '../todo/todo.component';
-import { SignupComponent } from '../signup/signup.component';
 import { ProfileCardComponent } from '../../../shared/components/profile/profile-card/profile-card.component';
 
 @Component({
   selector: 'app-home',
-  imports: [ProfileCardComponent, NgIf, SignupComponent],
+  imports: [ProfileCardComponent, NgIf, TodoComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })

@@ -1,1 +1,80 @@
-<p>order-detail works!</p>
+<section class="h-100 py-2" style="background-color: #eee; min-height: 100vh">
+  <app-order-status-bar></app-order-status-bar>
+  <div
+    class="mt-4 mx-auto h-100 w-100 p-0 d-flex container justify-content-between"
+  >
+    <div class="col-lg-7 border bg-white rounded">
+      <div class="p-3">
+        <p><strong>OrderID: </strong> {{ order.orderId }}</p>
+        <p><strong>Order Date: </strong>{{ order.createAt | date }}</p>
+        <p><strong>Estimated Delivery Date:</strong></p>
+      </div>
+      <div class="px-3">
+        <table class="table">
+          <thead class="">
+            <tr class="table-dark">
+              <th scope="col" class="col-7">Image</th>
+              <th scope="col" class="col-2 text-center">Quantity</th>
+              <th scope="col" class="col-2 text-center">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of order.items">
+              <td>
+                <div class="d-flex">
+                  <img
+                    [src]="item.imageUrl"
+                    class="img-fluid me-3"
+                    style="width: 65px; height: auto; object-fit: contain"
+                    alt="Product Image"
+                  />
+
+                  <div class="align-middle">
+                    <div class="text-primary">
+                      {{ imageDetailMap[item.id].author }}
+                    </div>
+                    <div>
+                      {{ imageDetailMap[item.id].width }} x
+                      {{ imageDetailMap[item.id].height }}
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="col-2 align-middle">
+                <div class="text-center">
+                  {{ item.quantity }}
+                </div>
+              </td>
+              <td class="text-center align-middle">
+                {{ item.price * item.quantity }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="d-flex justify-content-between w-100">
+          <p class="mb-2 fw-bold">Total</p>
+          <p class="mb-2 h5">{{ totalAmount | currency }}</p>
+        </div>
+
+        <div class="d-flex justify-content-between w-100">
+          <p class="mb-2 fw-bold">Shipping</p>
+          <p class="mb-2 h5">$20.00</p>
+        </div>
+
+        <div class="d-flex justify-content-between w-100">
+          <p class="mb-2 fw-bold">Total (Incl. taxes)</p>
+          <p class="mb-2 h5">{{ totalAmount | currency }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="flex-column" style="width: 450px">
+      <div class="shadow-sm border card">
+        <div class="card-body">
+          <h5 class="card-title font-weight-bold"></h5>
+          <p class="card-text mb-2"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

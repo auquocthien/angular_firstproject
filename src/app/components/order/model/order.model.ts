@@ -29,6 +29,12 @@ export enum OrderStatus {
   CANCEL = 'cancel',
 }
 
+export interface OrderReceiver {
+  name: string;
+  phone: string;
+  address: IAddress;
+}
+
 export interface OrderDetail {
   orderId: string;
   items: CartItem[];
@@ -39,5 +45,5 @@ export interface OrderDetail {
   payment: Payment;
   note?: string;
   estimatedDeliveryDate?: Date;
-  receiver: IUserInfo;
+  receiver: IUserInfo | OrderReceiver;
 }
