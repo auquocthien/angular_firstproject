@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import * as AppStore from '../../app/store/reducer';
 import { map } from 'rxjs';
 
-export const addtocartGuard: CanActivateFn = (route, state) => {
+export const AuthGuard: CanActivateFn = (route, state) => {
   const store = inject(Store);
   const router = inject(Router);
   return store.select(AppStore.selectUser).pipe(

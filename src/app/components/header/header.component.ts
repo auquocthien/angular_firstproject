@@ -1,20 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { map, Observable } from 'rxjs';
 import { IUser } from '../../../shared/models/user.model';
 import { Store } from '@ngrx/store';
 import { selectUser } from '../../store/reducer';
-import { AsyncPipe, JsonPipe, NgIf } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { SearchComponent } from './components/search/search.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { CartService } from '../cart/services/cart.service';
+import { AuthService } from '../../../shared/services/auth.service';
 
 @Component({
   selector: 'app-header',
   imports: [
     RouterLink,
-    AsyncPipe,
     NgIf,
     RouterLinkActive,
     SearchComponent,
@@ -24,27 +23,34 @@ import { CartService } from '../cart/services/cart.service';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent implements OnInit {
-  user$: Observable<IUser | null>;
+  user: IUser;
   headerIcon = {
     cart: faCartArrowDown,
   };
   totalItemInCart: number;
+  isSignin: boolean;
 
   constructor(
-    store: Store,
+    private store: Store,
     private router: Router,
-    private cartService: CartService
-  ) {
-    this.user$ = store.select(selectUser);
-  }
+    private cartService: CartService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.cartService.cart$.subscribe((cart) => {
       this.totalItemInCart = cart.items.length;
     });
+    this.store.select(selectUser).subscribe((user) => {
+      user = user;
+      this.isSignin = !!user;
+    });
   }
 
-  onButtonClick(route: string) {
+  onButtonClick(route: string, signout: boolean = false) {
+    if (this.isSignin && signout) {
+      this.authService.signout();
+    }
     this.router.navigate([route]);
   }
 }

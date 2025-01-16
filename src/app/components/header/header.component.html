@@ -27,7 +27,7 @@
         <button
           [routerLinkActive]="'font-weight-bold'"
           class="btn border text-white shadow bg-dark"
-          *ngIf="user$ | async as user; else noUser"
+          *ngIf="user; else noUser"
         >
           <a
             class="text-white nav-link"
@@ -50,9 +50,9 @@
         <button
           class="btn border text-white shadow bg-dark"
           [routerLinkActive]="'font-weight-bold'"
-          (click)="onButtonClick('')"
+          (click)="onButtonClick('', true)"
         >
-          User
+          {{ isSignin ? "Signout" : "Signin" }}
         </button>
         <button
           class="btn border text-white shadow bg-dark"

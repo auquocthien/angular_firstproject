@@ -10,4 +10,8 @@ export class ToasterService {
   success(message: string, title: string = 'success') {
     this.toastr.success(message, title, { timeOut });
   }
+
+  error(message: string, title: string = 'error') {
+    this.toastr.error(message, title, { timeOut });
+  }
 }
