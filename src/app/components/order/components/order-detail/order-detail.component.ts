@@ -6,6 +6,9 @@ import { OrderService } from '../../services/order.service';
 import { CurrencyPipe, DatePipe, NgFor } from '@angular/common';
 import { Image } from '../../../images/model/image.model';
 import { ImageService } from '../../../images/service/image.service';
+import { IUser } from '../../../../../shared/models/user.model';
+import { Store } from '@ngrx/store';
+import * as AppStore from '../../../../store/reducer';
 
 @Component({
   selector: 'app-order-detail',
@@ -17,10 +20,12 @@ export class OrderDetailComponent implements OnInit {
   order: OrderDetail;
   imageDetailMap: { [key: string]: Image } = {};
   totalAmount: number;
+  userProfile: IUser;
 
   constructor(
     private orderService: OrderService,
-    private imageService: ImageService
+    private imageService: ImageService,
+    private store: Store
   ) {}
 
   ngOnInit(): void {
@@ -33,6 +38,10 @@ export class OrderDetailComponent implements OnInit {
       );
     });
 
+    this.store.select(AppStore.selectUser).subscribe((profile) => {
+      this.userProfile = profile;
+    });
+
     this.getImageDetail();
   }
 
@@ -42,5 +51,10 @@ export class OrderDetailComponent implements OnInit {
         this.imageDetailMap[item.id] = d;
       });
     });
+  }
+
+  getUserInfo(): string {
+    const { phone, address } = this.userProfile.profile;
+    return `${phone}, ${address[0].street}, ${address[0].suite}, ${address[0].city}`;
   }
 }

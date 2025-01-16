@@ -60,7 +60,7 @@ export class SearchPopupComponent implements OnChanges, OnDestroy {
       .pipe(
         map((staffs: IUser[]) => {
           return Object.values(staffs).filter((staff) =>
-            staff.userInfo.username.toLowerCase().includes(text.toLowerCase())
+            staff.profile.username.toLowerCase().includes(text.toLowerCase())
           );
         })
       )

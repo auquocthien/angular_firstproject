@@ -31,7 +31,7 @@ import { Todo } from '../../../../app/components/todo/models/todo.model';
 export class ProfileCardComponent implements OnInit, OnDestroy {
   selectedUser = -1;
 
-  @Output() sendUserId = new EventEmitter<number>();
+  @Output() sendUserId = new EventEmitter<string>();
 
   user$: Observable<IUser | null>;
   users$: Observable<IUser[]>;
@@ -53,11 +53,11 @@ export class ProfileCardComponent implements OnInit, OnDestroy {
     this.users$.subscribe((user) => console.log(user));
   }
 
-  trackByFn(index: number, item: IUser): number {
-    return item.userAccount.userId; // Trả về 'key' của mỗi cặp key-value
-  }
+  // trackByFn(index: number, item: IUser): number {
+  //   return (item.account.userId); // Trả về 'key' của mỗi cặp key-value
+  // }
 
-  getComppletePercent(userId: number) {
+  getCompletePercent(userId: string) {
     var totalTodos = 0;
     var completed = 0;
     this.store
@@ -73,16 +73,16 @@ export class ProfileCardComponent implements OnInit, OnDestroy {
     return (completed / totalTodos) * 100;
   }
 
-  getCompletionColor(userId: number) {
+  getCompletionColor(userId: string) {
     return {
       background:
-        this.getComppletePercent(userId) > 50
+        this.getCompletePercent(userId) > 50
           ? 'linear-gradient(#4facfe, #00f2fe)'
           : 'linear-gradient(#ff7f7f, #7fafff)',
     };
   }
 
-  onSelectUser(userId: number): void {
+  onSelectUser(userId: string): void {
     this.sendUserId.emit(userId);
   }
 }

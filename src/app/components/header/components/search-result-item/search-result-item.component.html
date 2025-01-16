@@ -1,6 +1,6 @@
 <div class="border rounded my-2 px-2 search-result-item py-auto">
-  <small *ngIf="asignFor != 0">{{ owner }}</small>
-  <p class="text-bold" appHightlightSubtext [subtext]="searchText">
+  <small *ngIf="assignFor != ''">{{ owner }}</small>
+  <p class="text-bold" appHighlightSubtext [subtext]="searchText">
     {{ title }}
   </p>
 </div>

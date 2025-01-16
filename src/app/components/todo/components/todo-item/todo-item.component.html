@@ -12,7 +12,7 @@
   </div>
   <div
     class="align-center col-sm-4"
-    [appHightlightCompleteTodo]="todo.completed"
+    [appHighlightCompleteTodo]="todo.completed"
     *ngIf="!isEdit(todo.id); else editTodo"
   >
     {{ todo.title | firstLetterUppercase }}

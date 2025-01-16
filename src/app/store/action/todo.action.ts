@@ -17,15 +17,15 @@ export const loadTodoFailure = createAction('[Todo] load todo fail');
 
 export const deleteTodo = createAction(
   '[Todo] delete todo',
-  props<{ id: number }>()
+  props<{ id: string }>()
 );
 
 export const editTodo = createAction(
   '[Todo] edit todo',
-  props<{ id: number; title: string }>()
+  props<{ id: string; title: string }>()
 );
 
 export const toggleCompleteStatus = createAction(
   '[Todo] toggle complete status',
-  props<{ id: number }>()
+  props<{ id: string }>()
 );

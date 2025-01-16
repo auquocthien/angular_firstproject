@@ -18,7 +18,7 @@ import { CartItem } from '../../../cart/model/cart.model';
 import { Observable } from 'rxjs';
 import {
   IUser,
-  IUserInfo,
+  IUserProfile,
   UserRole,
 } from '../../../../../shared/models/user.model';
 
@@ -86,7 +86,7 @@ export class ImageDetailComponent implements OnInit {
 
   isDisableButton() {
     return (
-      this.user == undefined || this.user.userAccount.role !== UserRole.Customer
+      this.user == undefined || this.user.account.role !== UserRole.Customer
     );
   }
 

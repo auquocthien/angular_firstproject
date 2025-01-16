@@ -1,8 +1,4 @@
-import {
-  IAddress,
-  IGeo,
-  IUserInfo,
-} from '../../../../shared/models/user.model';
+import { IAddress, IUserProfile } from '../../../../shared/models/user.model';
 import { CartItem } from '../../cart/model/cart.model';
 
 export enum PaymentMethod {
@@ -45,5 +41,5 @@ export interface OrderDetail {
   payment: Payment;
   note?: string;
   estimatedDeliveryDate?: Date;
-  receiver: IUserInfo | OrderReceiver;
+  receiver: OrderReceiver;
 }

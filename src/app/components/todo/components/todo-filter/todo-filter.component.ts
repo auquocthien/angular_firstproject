@@ -9,7 +9,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class TodoFilterComponent {
   @Input() totalTodo = 0;
   @Input() completeCount = 0;
-  @Input() uncompleteCount = 0;
+  @Input() uncompletedCount = 0;
 
   @Output() selectedFilter = new EventEmitter<string>();
 

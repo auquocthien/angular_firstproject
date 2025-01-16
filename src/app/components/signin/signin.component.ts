@@ -11,6 +11,9 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as AuthActions from '../../store/action/user.action';
 import { IUser } from '../../../shared/models/user.model';
+import { LocalStorageService } from '../../../shared/services/local-storage.service';
+import { catchError, switchMap, take, tap, throwError } from 'rxjs';
+import { transformUserInfo } from '../../../shared/helper/transform-user-info';
 @Component({
   selector: 'app-user',
   templateUrl: './signin.component.html',
@@ -21,13 +24,14 @@ export class SigninComponent {
   user: IUser | null = null;
 
   constructor(
-    private AuthService: AuthService,
+    private authService: AuthService,
     private router: Router,
-    private store: Store
+    private store: Store,
+    private localService: LocalStorageService
   ) {}
 
   profileForm = new FormGroup({
-    username: new FormControl<string>('', [
+    email: new FormControl<string>('', [
       Validators.required,
       Validators.minLength(3),
     ]),
@@ -35,27 +39,39 @@ export class SigninComponent {
   });
 
   handleSubmit() {
-    try {
-      if (this.profileForm.valid) {
-        const { username, password } = this.profileForm.value;
-        if (username && password) {
-          const user$ = this.AuthService.signin(username, password);
-          if (user$) {
-            user$.subscribe((user) => {
-              if (user) {
-                this.user = user;
-                if (this.user) {
-                  this.store.dispatch(AuthActions.login({ user: this.user }));
-                  this.router.navigate(['todo', this.user?.userAccount.userId]);
-                  // this.router.navigate(['']);
-                }
-              }
-            });
-          }
-        }
+    if (this.profileForm.valid) {
+      const { email, password } = this.profileForm.value;
+      if (email && password) {
+        this.authService
+          .signin(email, password)
+          .pipe(
+            switchMap((res) => {
+              console.log(res);
+
+              this.localService.setItem('idToken', res.idToken);
+              this.localService.setItem('uuid', res.localId);
+              this.localService.setItem('refreshToken', res.refreshToken);
+              this.localService.setItem('expiresIn', res.expiresIn);
+              this.authService.isAuth = true;
+
+              return this.authService.getUserProfile(res.localId);
+            }),
+            tap((profile) => {
+              console.log(profile);
+              const uuid = this.localService.getItem('uuid');
+
+              this.store.dispatch(
+                AuthActions.login({ user: transformUserInfo(profile, uuid) })
+              );
+              this.router.navigate(['todo', uuid]);
+            }),
+            catchError((error) => {
+              console.log(error);
+              return throwError(() => error);
+            })
+          )
+          .subscribe();
       }
-    } catch (error) {
-      console.log('[handleSubmit]: ', error);
     }
   }
 }

@@ -32,9 +32,7 @@
           <a
             class="text-white nav-link"
             [routerLink]="
-              user.userAccount.userId
-                ? ['todo', user.userAccount.userId]
-                : ['todo']
+              user.account.userId ? ['todo', user.account.userId] : ['todo']
             "
           >
             Todo

@@ -17,38 +17,38 @@ export class SearchResultItemComponent implements OnInit {
   @Input() data: IUser | Todo;
   @Input() searchText: string;
   title: string = '';
-  asignFor: number = 0;
+  assignFor: string = '';
   owner: string = '';
 
   constructor(private store: Store) {}
 
   ngOnInit(): void {
     if (this.isUser(this.data)) {
-      this.title = this.data.userAccount.username;
+      this.title = this.data.account.username;
     }
 
     if (this.isTodo(this.data)) {
       this.title = this.data.title;
-      this.asignFor = this.data.userId;
+      this.assignFor = this.data.userId;
 
       this.store
         .select(AppStore.selectStaff)
         .pipe(
           map((users) => {
             return Object.values(users).filter(
-              (user) => user.userAccount.userId == this.asignFor
+              (user) => user.account.userId == this.assignFor
             );
           })
         )
         .subscribe((user) => {
           console.log(user);
-          this.owner = user.at(0).userAccount.username ?? 'unknown';
+          this.owner = user.at(0).account.username ?? 'unknown';
         });
     }
   }
 
   isUser(data: any): data is IUser {
-    return data && 'userInfo' in data && 'userAccount' in data;
+    return data && 'userInfo' in data && 'account' in data;
   }
 
   isTodo(data: any): data is Todo {

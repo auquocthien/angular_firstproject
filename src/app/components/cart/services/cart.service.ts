@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IUserInfo } from '../../../../shared/models/user.model';
+import { IUserProfile } from '../../../../shared/models/user.model';
 import { Cart, CartItem } from '../model/cart.model';
 import { v4 as uuidv4 } from 'uuid';
 import { BehaviorSubject, Observable } from 'rxjs';

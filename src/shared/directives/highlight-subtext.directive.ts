@@ -7,11 +7,11 @@ import {
 } from '@angular/core';
 
 @Directive({
-  selector: '[appHightlightSubtext]',
+  selector: '[appHighlightSubtext]',
 })
 export class HighlightSubtextDirective implements AfterViewInit {
   @Input() subtext = '';
-  pharagraph = '';
+  paragraph = '';
 
   constructor(private el: ElementRef, private renderer: Renderer2) {}
   ngAfterViewInit(): void {
@@ -19,11 +19,11 @@ export class HighlightSubtextDirective implements AfterViewInit {
   }
 
   private highlight() {
-    this.pharagraph = this.el.nativeElement.textContent.trim();
-    if (!this.subtext || !this.pharagraph.includes(this.subtext)) {
+    this.paragraph = this.el.nativeElement.textContent.trim();
+    if (!this.subtext || !this.paragraph.includes(this.subtext)) {
       return;
     }
-    const [forward, backward] = this.pharagraph.split(this.subtext);
+    const [forward, backward] = this.paragraph.split(this.subtext);
 
     const spanTag = this.renderer.createElement('span');
     const spanText = this.renderer.createText(this.subtext);

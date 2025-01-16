@@ -2,46 +2,19 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Image } from '../model/image.model';
 import { map } from 'rxjs';
+import { LocalStorageService } from '../../../../shared/services/local-storage.service';
+import { imageUrl } from '../../../../config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ImageService {
-  private baseUrl = 'https://picsum.photos/v2/list';
-  // extraImageInfo = [
-  //   { price: 86, quantity: 5, isOutOfStock: false },
-  //   { price: 4, quantity: 4, isOutOfStock: true },
-  //   { price: 15, quantity: 1, isOutOfStock: true },
-  //   { price: 69, quantity: 1, isOutOfStock: true },
-  //   { price: 7, quantity: 7, isOutOfStock: false },
-  //   { price: 26, quantity: 9, isOutOfStock: false },
-  //   { price: 96, quantity: 9, isOutOfStock: true },
-  //   { price: 40, quantity: 5, isOutOfStock: false },
-  //   { price: 47, quantity: 10, isOutOfStock: false },
-  //   { price: 94, quantity: 10, isOutOfStock: false },
-  //   { price: 82, quantity: 6, isOutOfStock: false },
-  //   { price: 33, quantity: 8, isOutOfStock: false },
-  //   { price: 9, quantity: 5, isOutOfStock: true },
-  //   { price: 76, quantity: 2, isOutOfStock: false },
-  //   { price: 59, quantity: 1, isOutOfStock: false },
-  //   { price: 52, quantity: 7, isOutOfStock: false },
-  //   { price: 76, quantity: 5, isOutOfStock: false },
-  //   { price: 77, quantity: 10, isOutOfStock: false },
-  //   { price: 90, quantity: 3, isOutOfStock: false },
-  //   { price: 8, quantity: 4, isOutOfStock: false },
-  //   { price: 37, quantity: 8, isOutOfStock: true },
-  //   { price: 64, quantity: 6, isOutOfStock: false },
-  //   { price: 29, quantity: 9, isOutOfStock: false },
-  //   { price: 75, quantity: 6, isOutOfStock: false },
-  //   { price: 46, quantity: 8, isOutOfStock: true },
-  //   { price: 95, quantity: 3, isOutOfStock: false },
-  //   { price: 95, quantity: 10, isOutOfStock: false },
-  //   { price: 35, quantity: 3, isOutOfStock: false },
-  //   { price: 45, quantity: 9, isOutOfStock: false },
-  //   { price: 99, quantity: 6, isOutOfStock: false },
-  // ];
+  // private baseUrl = 'https://picsum.photos/v2/list';
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(
+    private httpClient: HttpClient,
+    private localService: LocalStorageService
+  ) {}
 
   getImages() {
     // return this.httpClient.get<Image[]>(this.baseUrl).pipe(
@@ -52,9 +25,9 @@ export class ImageService {
     //     return imageAfterTransform;
     //   })
     // );
-    return this.httpClient.get<Image[]>(
-      'https://angular-71209-default-rtdb.firebaseio.com/images.json'
-    );
+    const idToken = this.localService.getItem('idToken');
+    const url = `${imageUrl}.json?auth=${idToken}`;
+    return this.httpClient.get<Image[]>(url);
   }
 
   getImageDetail(imageId: string) {

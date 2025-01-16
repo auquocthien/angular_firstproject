@@ -1,28 +1,34 @@
 export interface ICompany {
-  name: string;
-  catchPhrase: string;
-  bs: string;
+  companyName: string;
+  tagline: string;
+  businessType: string;
 }
 
-export interface IGeo {
+export interface IGeoLocation {
   lat: number;
   long: number;
 }
-
+export enum AddressType {
+  Home = 'home',
+  Work = 'work',
+  Billing = 'billing',
+  Shipping = 'shipping',
+  Other = 'other',
+}
 export interface IAddress {
+  type: AddressType;
   street: string;
   suite: string;
   city: string;
   zipcode: string;
-  geo: IGeo;
+  geo: IGeoLocation;
 }
 
-export interface IUserInfo {
-  name: string;
+export interface IUserProfile {
+  fullName: string;
   username: string;
-  email: string;
   phone: string;
-  website: string;
+  websiteUrl: string;
   address: IAddress;
   company: ICompany;
 }
@@ -33,14 +39,30 @@ export enum UserRole {
   Manager = 'manager',
   Customer = 'customer',
 }
+
 export interface IUserAccount {
-  userId: number;
+  userId: string;
+  email: string;
   username: string;
   password: string;
   role: UserRole;
 }
 
 export interface IUser {
-  userInfo: IUserInfo;
-  userAccount: IUserAccount;
+  profile: IUserProfile;
+  account: IUserAccount;
+  manager?: IUser; // Optional field for the manager of the user
+}
+
+export interface IManager {
+  id: number;
+  name: string;
+  department?: string;
+  employees: IEmployee[];
+}
+
+export interface IEmployee {
+  id: number;
+  name: string;
+  role: string;
 }

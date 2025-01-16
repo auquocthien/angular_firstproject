@@ -16,12 +16,12 @@ import * as AppStore from '../../store/reducer';
 import * as TodoAction from '../../store/action/todo.action';
 import { FormsModule } from '@angular/forms';
 import { AddTodoComponent } from './components/add-todo/add-todo.component';
-import { HighlighCompleteTodoDirective } from './directives/hightlight-complete-todo.directive';
 
 import { NgFor, NgIf } from '@angular/common';
 import { ProgressBarComponent } from './components/progress/progress-bar/progress-bar.component';
 import { TodoItemComponent } from './components/todo-item/todo-item.component';
 import { TodoFilterComponent } from './components/todo-filter/todo-filter.component';
+import { TodoService } from './services/todo.service';
 @Component({
   selector: 'app-todo',
   standalone: true,
@@ -45,14 +45,15 @@ export class TodoComponent implements OnChanges, OnInit {
 
   @Input() showCompleteCol: boolean = true;
 
-  @Input() userId: number = 0;
+  @Input() userId: string = '';
   user$: Observable<IUser | null>;
   todo$!: Observable<Todo[]>;
 
-  @ViewChild(HighlighCompleteTodoDirective)
-  highlightDirective: HighlighCompleteTodoDirective;
-
-  constructor(private route: ActivatedRoute, private store: Store<AppState>) {
+  constructor(
+    private route: ActivatedRoute,
+    private store: Store<AppState>,
+    private todoService: TodoService
+  ) {
     this.user$ = this.store.select(AppStore.selectUser);
   }
 
@@ -67,10 +68,7 @@ export class TodoComponent implements OnChanges, OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe((param) => {
       if (param.get('id') != null) {
-        this.userId =
-          this.userId != undefined
-            ? this.userId
-            : parseInt(param.get('id')!, 10);
+        this.userId = this.userId != undefined ? this.userId : param.get('id')!;
         this.showCompleteCol = true;
       }
     });
@@ -112,7 +110,7 @@ export class TodoComponent implements OnChanges, OnInit {
     }
   }
 
-  filterTodoByUserId(userId: number) {
+  filterTodoByUserId(userId: string) {
     this.todos = this.todos.filter((todo) => todo.userId === userId);
     this.filteredTodos = [...this.todos];
   }
@@ -120,14 +118,16 @@ export class TodoComponent implements OnChanges, OnInit {
   addTodo(todoItem: string): void {
     const newTodo: Todo = {
       userId: this.userId,
-      id: this.todos.length + 1,
       title: todoItem,
       completed: false,
     };
+    this.todoService.addTodo(newTodo).subscribe((res) => {
+      console.log(res);
+    });
     this.store.dispatch(TodoAction.addTodo({ todo: newTodo }));
   }
 
-  showCompletColumn(): boolean {
+  showCompleteColumn(): boolean {
     return this.showCompleteCol === undefined;
   }
 }

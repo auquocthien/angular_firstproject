@@ -5,11 +5,6 @@
   >
     <div class="col-lg-7 border bg-white rounded">
       <div class="p-3">
-        <p><strong>OrderID: </strong> {{ order.orderId }}</p>
-        <p><strong>Order Date: </strong>{{ order.createAt | date }}</p>
-        <p><strong>Estimated Delivery Date:</strong></p>
-      </div>
-      <div class="px-3">
         <table class="table">
           <thead class="">
             <tr class="table-dark">
@@ -69,10 +64,26 @@
       </div>
     </div>
     <div class="flex-column" style="width: 450px">
-      <div class="shadow-sm border card">
-        <div class="card-body">
-          <h5 class="card-title font-weight-bold"></h5>
-          <p class="card-text mb-2"></p>
+      <div class="shadow-sm border card" style="border-radius: 20px 20px 0 0">
+        <div
+          class="bg-success p-3 text-white"
+          style="border-radius: 20px 20px 0 0"
+        >
+          <strong>Estimated Delivery Date:</strong>
+        </div>
+        <div class="p-3">
+          <strong>Shipping Address</strong>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="mr-3">
+              <i class="fa-solid fa-location-dot"></i>
+            </div>
+            <div class="w-75">
+              <h5 class="card-title font-weight-bold">
+                {{ userProfile.profile.fullName }}
+              </h5>
+              <p class="card-text mb-2">{{ getUserInfo() }}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

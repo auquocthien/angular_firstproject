@@ -8,10 +8,10 @@ import {
 } from '@angular/core';
 
 @Directive({
-  selector: '[appHightlightCompleteTodo]',
+  selector: '[appHighlightCompleteTodo]',
 })
 export class HighlighCompleteTodoDirective implements OnChanges {
-  @Input('appHightlightCompleteTodo') isCompleted: boolean = true;
+  @Input('appHighlightCompleteTodo') isCompleted: boolean = true;
 
   constructor(private el: ElementRef) {}
 

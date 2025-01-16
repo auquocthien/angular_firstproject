@@ -6,7 +6,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { IUserInfo } from '../../../../../../../shared/models/user.model';
+import { IUserProfile } from '../../../../../../../shared/models/user.model';
+import { OrderReceiver } from '../../../../model/order.model';
 
 @Component({
   selector: 'app-edit-recipient-info',
@@ -16,8 +17,8 @@ import { IUserInfo } from '../../../../../../../shared/models/user.model';
 })
 export class EditRecipientInfoComponent implements OnInit {
   receiverForm!: FormGroup;
-  @Input() defaultReceiver: IUserInfo;
-  @Output() emitNewReceiver: EventEmitter<IUserInfo> = new EventEmitter();
+  @Input() defaultReceiver: OrderReceiver;
+  @Output() emitNewReceiver: EventEmitter<OrderReceiver> = new EventEmitter();
 
   constructor(private fb: FormBuilder) {}
 

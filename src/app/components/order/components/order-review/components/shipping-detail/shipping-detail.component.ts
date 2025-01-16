@@ -5,10 +5,14 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { IUserInfo } from '../../../../../../../shared/models/user.model';
+import {
+  AddressType,
+  IUserProfile,
+} from '../../../../../../../shared/models/user.model';
 import { Store } from '@ngrx/store';
 import {
   OrderDetail,
+  OrderReceiver,
   Payment,
   PaymentMethod,
 } from '../../../../model/order.model';
@@ -25,6 +29,7 @@ import { EditRecipientInfoComponent } from '../edit-recipient-info/edit-recipien
 import { EditCardInfoComponent } from '../edit-card-info/edit-card-info.component';
 import { FormsModule } from '@angular/forms';
 import { Route, Router } from '@angular/router';
+import * as AppStore from '../../../../../../store/reducer';
 
 @Component({
   selector: 'app-shipping-detail',
@@ -40,9 +45,10 @@ import { Route, Router } from '@angular/router';
   styleUrl: './shipping-detail.component.scss',
 })
 export class ShippingDetailComponent implements OnInit {
-  @Output() createOrderEmitter: EventEmitter<boolean> = new EventEmitter();
-  userInfo: IUserInfo;
+  @Output() createOrderEmitter: EventEmitter<OrderReceiver> =
+    new EventEmitter();
   note: string;
+  receiver: OrderReceiver;
 
   selectedCardType: string = 'cash';
   payment: Payment;
@@ -66,36 +72,19 @@ export class ShippingDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.store.select(AppStore.selectUser).subscribe((user) => {
-    //   this.userInfo = user.userInfo;
-    // });
-    this.userInfo = {
-      name: 'Leanne Graham',
-      username: 'Bret',
-      email: 'Sincere@april.biz',
-      address: {
-        street: 'Kulas Light',
-        suite: 'Apt. 556',
-        city: 'Gwenborough',
-        zipcode: '92998-3874',
-        geo: {
-          lat: -37.3159,
-          long: 81.1496,
-        },
-      },
+    this.store.select(AppStore.selectUser).subscribe((user) => {
+      const profile = user.profile;
 
-      phone: '1-770-736-8031 x56442',
-      website: 'hildegard.org',
-      company: {
-        name: 'Romaguera-Crona',
-        catchPhrase: 'Multi-layered client-server neural-net',
-        bs: 'harness real-time e-market',
-      },
-    };
+      this.receiver = {
+        name: profile.fullName,
+        phone: profile.phone,
+        address: profile.address[0],
+      };
+    });
   }
 
   getUserInfo(): string {
-    const { phone, address } = this.userInfo;
+    const { phone, address } = this.receiver;
     return `${phone}, ${address.street}, ${address.suite}, ${address.city}`;
   }
 
@@ -116,12 +105,12 @@ export class ShippingDetailComponent implements OnInit {
     this.selectedCardType = 'cash';
   }
 
-  updateReceiver(newReceiver: IUserInfo) {
+  updateReceiver(newReceiver: OrderReceiver) {
     this.showModal = false;
     this.showEditInfo = false;
 
     if (newReceiver) {
-      this.userInfo = newReceiver;
+      this.receiver = newReceiver;
     }
   }
 
@@ -156,6 +145,6 @@ export class ShippingDetailComponent implements OnInit {
   }
 
   createOrder() {
-    this.createOrderEmitter.emit(true);
+    this.createOrderEmitter.emit(this.receiver);
   }
 }

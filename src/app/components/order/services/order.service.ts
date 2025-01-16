@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, from, Observable, of } from 'rxjs';
 import { OrderDetail, OrderStatus, PaymentMethod } from '../model/order.model';
+import { AddressType } from '../../../../shared/models/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class OrderService {
@@ -50,6 +51,7 @@ export class OrderService {
       name: 'Âu Quốc Thiện',
       phone: '0867923813',
       address: {
+        type: AddressType.Shipping,
         street: 'Hiếu Phụng',
         suite: '999',
         city: 'Vĩnh Long',

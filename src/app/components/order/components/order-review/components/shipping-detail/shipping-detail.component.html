@@ -5,7 +5,7 @@
     (click)="showEditModal(true, false)"
   >
     <div class="card-body">
-      <h5 class="card-title font-weight-bold">{{ userInfo.name }}</h5>
+      <h5 class="card-title font-weight-bold">{{ receiver.name }}</h5>
       <p class="card-text mb-2">{{ getUserInfo() }}</p>
       <small class="text-primary">Tap to change</small>
     </div>
@@ -113,7 +113,7 @@
         </button>
         <app-edit-recipient-info
           *ngIf="showEditInfo"
-          [defaultReceiver]="userInfo"
+          [defaultReceiver]="receiver"
           (emitNewReceiver)="updateReceiver($event)"
         ></app-edit-recipient-info>
         <app-edit-card-info
