@@ -5,10 +5,13 @@ import { PageNotFoundComponent } from '../shared/components/notfound/page-not-fo
 import { SigninComponent } from './components/signin/signin.component';
 import { CartComponent } from './components/cart/cart.component';
 import { AuthGuard } from '../shared/guard/auth.guard';
+import { SignupComponent } from './components/signup/signup.component';
+import { BlackJackComponent } from './components/blackjack/blackjack.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent, title: 'Home component' },
   { path: '', component: SigninComponent, title: 'User component' },
+  { path: 'signup', component: SignupComponent },
   {
     path: 'todo/:id',
     component: TodoComponent,
@@ -27,5 +30,6 @@ export const routes: Routes = [
       import('../app/components/order/order.routes').then((m) => m.route),
     canActivate: [AuthGuard],
   },
+  { path: 'blackjack', component: BlackJackComponent },
   { path: '**', component: PageNotFoundComponent },
 ];

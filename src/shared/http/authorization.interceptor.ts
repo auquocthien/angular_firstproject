@@ -15,14 +15,16 @@ export const authorizationInterceptor: HttpInterceptorFn = (
   const localService = inject(LocalStorageService);
   const token = localService.getItem('idToken');
 
-  console.log('interceptor called');
+  console.log('interceptor called: ', req.url);
+
+  if (req.url.includes('signUp')) {
+    return next(req);
+  }
 
   if (token) {
-    if (!req.params.has('auth')) {
-      req = req.clone({
-        setParams: { auth: token },
-      });
-    }
+    req = req.clone({
+      setParams: { auth: token },
+    });
   }
 
   return next(req);

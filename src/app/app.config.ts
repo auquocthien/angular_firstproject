@@ -12,16 +12,21 @@ import { ImageEffect } from './store/effect/image.effect';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
 import { authorizationInterceptor } from '../shared/http/authorization.interceptor';
+import { errorHandlerInterceptor } from '../shared/http/error-handler.interceptor';
+// import { provideDatatable } from 'ngx-datatable';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes, withComponentInputBinding()),
-    provideHttpClient(withInterceptors([authorizationInterceptor])),
+    provideHttpClient(
+      withInterceptors([authorizationInterceptor, errorHandlerInterceptor])
+    ),
     provideStore(reducers),
     provideZoneChangeDetection(),
     provideStoreDevtools({ maxAge: 25 }),
     provideEffects([TodoEffect, ImageEffect]),
     provideAnimations(),
     provideToastr(),
+    // provideDatatable(),
   ],
 };

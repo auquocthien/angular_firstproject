@@ -2,8 +2,11 @@
   >*{{ controlName }} is require
 </small>
 <small *ngIf="minLengthError" class="text-danger"
-  >*{{ controlName }} must be at least 5 characters</small
+  >*{{ controlName }} must be at least {{ minLength }} characters</small
 >
 <small *ngIf="usernameExits" class="text-danger"
   >*{{ controlName }} is exits</small
+>
+<small *ngIf="invalidEmail" class="text-danger"
+  >*{{ controlName }} is invalid email</small
 >

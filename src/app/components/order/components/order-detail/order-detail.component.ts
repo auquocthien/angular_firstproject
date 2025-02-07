@@ -12,7 +12,7 @@ import * as AppStore from '../../../../store/reducer';
 
 @Component({
   selector: 'app-order-detail',
-  imports: [OrderStatusBarComponent, DatePipe, NgFor, CurrencyPipe],
+  imports: [OrderStatusBarComponent, NgFor, CurrencyPipe],
   templateUrl: './order-detail.component.html',
   styleUrl: './order-detail.component.scss',
 })

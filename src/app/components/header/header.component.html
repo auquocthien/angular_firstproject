@@ -11,7 +11,7 @@
         <button
           class="btn border text-white shadow bg-dark"
           [routerLinkActive]="'font-weight-bold'"
-          (click)="onButtonClick('home')"
+          [routerLink]="['home']"
         >
           Home
         </button>
@@ -19,7 +19,7 @@
         <button
           class="btn border text-white shadow bg-dark"
           [routerLinkActive]="'font-weight-bold'"
-          (click)="onButtonClick('/images')"
+          [routerLink]="['images']"
         >
           Image
         </button>
@@ -27,50 +27,45 @@
         <button
           [routerLinkActive]="'font-weight-bold'"
           class="btn border text-white shadow bg-dark"
+        >
+          Todo
+        </button>
+
+        <button
+          class="btn border text-white shadow bg-dark"
+          [routerLinkActive]="'font-weight-bold'"
+          [routerLink]="['']"
           *ngIf="user; else noUser"
         >
-          <a
-            class="text-white nav-link"
-            [routerLink]="
-              user.account.userId ? ['todo', user.account.userId] : ['todo']
-            "
-          >
-            Todo
-          </a>
+          Sign out
         </button>
+
         <ng-template #noUser>
           <button
             class="btn border text-white shadow bg-dark"
             [routerLinkActive]="'font-weight-bold'"
-            (click)="onButtonClick('/todo')"
+            (click)="signout()"
           >
-            Todo
+            Sign in
           </button>
         </ng-template>
+
         <button
           class="btn border text-white shadow bg-dark"
           [routerLinkActive]="'font-weight-bold'"
-          (click)="onButtonClick('', true)"
-        >
-          {{ isSignin ? "Signout" : "Signin" }}
-        </button>
-        <button
-          class="btn border text-white shadow bg-dark"
-          [routerLinkActive]="'font-weight-bold'"
-          (click)="onButtonClick('/order/review')"
+          [routerLink]="['blackjack']"
         >
           My Order
         </button>
-        <div>
-          <button
-            class="btn border text-white shadow bg-dark"
-            [routerLinkActive]="'font-weight-bold'"
-            (click)="onButtonClick('cart')"
-          >
-            <fa-icon [icon]="headerIcon.cart"></fa-icon>
-          </button>
-          <div class="cart-amount">{{ totalItemInCart }}</div>
-        </div>
+
+        <button
+          class="btn border text-white shadow bg-dark"
+          [routerLinkActive]="'font-weight-bold'"
+          [routerLink]="['cart']"
+        >
+          <fa-icon [icon]="headerIcon.cart"></fa-icon>
+        </button>
+        <div class="cart-amount">{{ totalItemInCart }}</div>
       </div>
     </div>
   </div>

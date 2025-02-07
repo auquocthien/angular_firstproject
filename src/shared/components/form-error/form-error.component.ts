@@ -11,6 +11,7 @@ import { AbstractControl, FormControl } from '@angular/forms';
 export class FormErrorComponent {
   @Input() control: AbstractControl;
   @Input() controlName: string;
+  @Input() minLength: number;
 
   get requiredError() {
     return this.control.hasError('required') && this.control.touched;
@@ -22,5 +23,9 @@ export class FormErrorComponent {
 
   get usernameExits() {
     return this.control.hasError('usernameExits') && this.control.touched;
+  }
+
+  get invalidEmail() {
+    return this.control.hasError('email') && this.control.touched;
   }
 }

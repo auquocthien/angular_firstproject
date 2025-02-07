@@ -28,9 +28,7 @@ export interface IUserProfile {
   fullName: string;
   username: string;
   phone: string;
-  websiteUrl: string;
   address: IAddress;
-  company: ICompany;
 }
 
 export enum UserRole {

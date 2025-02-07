@@ -1,22 +1,18 @@
 import {
   AfterViewInit,
-  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   OnInit,
   QueryList,
   ViewChildren,
 } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Cart, CartItem, FilteredList } from './model/cart.model';
 import { Store } from '@ngrx/store';
 import * as AppStore from '../../store/reducer';
 import { CartService } from './services/cart.service';
 import { CartItemComponent } from './components/cart-item/cart-item.component';
-import { CurrencyPipe, DatePipe, JsonPipe, NgFor, NgIf } from '@angular/common';
+import { CurrencyPipe, DatePipe, NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HoverButtonDirective } from '../../../shared/directives/hover-button.directive';
-import { SkeletonComponent } from '../../../shared/components/skeleton/skeleton.component';
 import { IUser } from '../../../shared/models/user.model';
 import { Router } from '@angular/router';
 
