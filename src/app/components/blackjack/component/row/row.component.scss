@@ -1,0 +1,11 @@
+.score {
+    width: 50%;
+    aspect-ratio: 2/1;
+    padding: 0 50px;
+    margin: auto;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+}

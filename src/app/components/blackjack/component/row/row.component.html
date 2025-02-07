@@ -1,0 +1,85 @@
+<div class="d-flex align-items-center gap-2" style="height: 40px; width: 100%">
+  <button
+    class="btn btn-dark text-white"
+    (click)="switchDealer()"
+    [disabled]="player.isDealer"
+  >
+    <fa-icon [icon]="rowIcon.icon"></fa-icon>
+  </button>
+
+  <div
+    class="col-2 text-white h-100 d-flex align-items-center justify-content-center"
+    [ngClass]="player.isDealer ? 'bg-danger' : 'bg-primary'"
+  >
+    {{ player.name }}
+  </div>
+
+  <!-- <div class="score h-100"> -->
+  <div class="h-100 col-2 d-flex align-items-center overflow-hidden">
+    <ng-scrollbar
+      #scorebarRef
+      [visibility]="'hover'"
+      [orientation]="'horizontal'"
+      style="height: 40px"
+      (scroll)="onScroll($event)"
+      (mouseenter)="onMouseEnter()"
+    >
+      <div class="d-flex align-items-center" style="height: 40px">
+        <div
+          class="border h-100 d-inline-flex align-items-center justify-content-center me-2"
+          style="min-width: 150px"
+          *ngFor="let score of player.score; let last = last"
+          (click)="showAction()"
+          [ngClass]="{ 'border-primary': last }"
+          #playerScore
+        >
+          {{ score }}
+        </div>
+      </div>
+    </ng-scrollbar>
+  </div>
+  <div
+    class="col-1 border d-flex align-items-center justify-content-center"
+    style="height: 40px"
+  >
+    {{ playerScore }}
+  </div>
+
+  <div class="d-flex justify-content-end gap-2">
+    <button
+      class="btn btn-primary"
+      (click)="updatePlayerScore(result.WIN)"
+      *ngIf="!player.isDealer"
+    >
+      ăn
+    </button>
+    <button class="btn btn-primary" (click)="updatePlayerScore(result.LOSE)">
+      thua
+    </button>
+    <button
+      class="btn btn-primary"
+      (click)="updatePlayerScore(result.BLACKJACK)"
+    >
+      xì dách
+    </button>
+    <button
+      class="btn btn-primary"
+      (click)="updatePlayerScore(result.FIVE_CARD)"
+    >
+      ngũ linh
+    </button>
+    <button
+      class="btn btn-primary"
+      (click)="updatePlayerScore(result.PERFECT_BLACKJACK)"
+    >
+      xì bàn
+    </button>
+    <button
+      class="btn btn-primary"
+      (click)="updatePlayerScore(result.PUSH)"
+      *ngIf="!player.isDealer"
+    >
+      chay
+    </button>
+  </div>
+</div>

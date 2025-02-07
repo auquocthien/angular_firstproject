@@ -1,0 +1,42 @@
+<div
+  class="d-flex align-items-center gap-2 bg-secondary text-white fw-bold p-2"
+  style="height: 40px; width: 100%"
+>
+  <div class="col-sm-3 text-center">Tên</div>
+  <div class="col-1 text-start">Vòng {{ roundCount }}</div>
+  <div class="col-2 text-center">Vòng hien tai</div>
+</div>
+<div *ngFor="let player of players" class="mx-4 my-3">
+  <app-row
+    [player]="player"
+    (sendScore)="updateRoundScore($event)"
+    (sendOffset)="sysScroll($event)"
+    (sendPlayerWillScroll)="setPlayerWillScroll($event)"
+    #playerRow
+  ></app-row>
+</div>
+
+<form class="form-inline mx-4 my-3">
+  <div class="d-flex gap-2">
+    <div class="form-group mb-3 col-1">
+      <input
+        type="number"
+        class="form-control"
+        name="bet"
+        [(ngModel)]="bet"
+        (input)="setBet()"
+      />
+    </div>
+    <div class="form-group mb-2 col-2">
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="newPlayerName"
+        name="newplayer"
+      />
+    </div>
+    <button (click)="addPlayer()" class="btn btn-primary mb-2">
+      add player
+    </button>
+  </div>
+</form>
