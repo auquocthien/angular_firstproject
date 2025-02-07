@@ -7,12 +7,11 @@ import {
 } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { AuthService } from '../../../shared/services/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as AuthActions from '../../store/action/user.action';
-import { IUser } from '../../../shared/models/user.model';
 import { LocalStorageService } from '../../../shared/services/local-storage.service';
-import { catchError, switchMap, tap, throwError } from 'rxjs';
+import { catchError, tap, throwError } from 'rxjs';
 import { transformUserInfo } from '../../../shared/helper/transform-user-info';
 import { ToastrService } from 'ngx-toastr';
 
@@ -20,7 +19,7 @@ import { ToastrService } from 'ngx-toastr';
   selector: 'app-user',
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.scss'],
-  imports: [ReactiveFormsModule, NgIf],
+  imports: [ReactiveFormsModule, NgIf, RouterLink],
 })
 export class SigninComponent implements OnInit {
   profileForm = new FormGroup({

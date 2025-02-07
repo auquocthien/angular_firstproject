@@ -1,0 +1,43 @@
+/* Sử dụng các hiệu ứng chuyển động */
+.transition-step {
+    opacity: 0;
+    transform: translateY(30px);
+    transition:
+        opacity 0.5s ease-out,
+        transform 0.5s ease-out;
+}
+
+.transition-step.ng-animating {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Thiết kế cho các trường nhập liệu và nút */
+.form-control {
+    border-radius: 5px; /* Bo tròn góc cho input */
+}
+
+.btn {
+    transition: transform 0.2s ease-in-out; /* Hiệu ứng phóng to khi hover */
+}
+
+.btn:hover {
+    transform: scale(1.05); /* Phóng to khi hover */
+}
+
+.form {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Thêm bóng đổ cho form */
+    border-radius: 10px;
+    padding: 25px;
+}
+
+/* Đảm bảo rằng các nút và form có kích thước phù hợp */
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+small.text-danger {
+    font-size: 14px;
+    font-weight: 500;
+}

@@ -1,5 +1,5 @@
 import { NgFor, NgIf, UpperCasePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -10,67 +10,108 @@ import {
 } from '@angular/forms';
 import { FormErrorComponent } from '../../../shared/components/form-error/form-error.component';
 import { AuthService } from '../../../shared/services/auth.service';
-import { CustomAsyncValidators } from '../../../shared/validators/async-validators.validators';
+import { AddressFormComponent } from '../../../shared/components/address-form/address-form/address-form.component';
+import { catchError, map } from 'rxjs';
+import { transformUserInfo } from '../../../shared/helper/transform-user-info';
+import { LocalStorageService } from '../../../shared/services/local-storage.service';
+import {
+  IAddress,
+  IUserAccount,
+  IUserProfile,
+} from '../../../shared/models/user.model';
+// import { CustomAsyncValidators } from '../../../shared/validators/async-validators.validators';
 
 @Component({
   selector: 'app-add-user-form',
   imports: [
     UpperCasePipe,
     NgIf,
-    NgFor,
     ReactiveFormsModule,
     FormErrorComponent,
+    AddressFormComponent,
   ],
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss'],
 })
 export class SignupComponent implements OnInit {
   userForm!: FormGroup;
+  accountForm: FormGroup;
+  step: number = 3;
+  showPasswordError: boolean = false;
 
-  constructor(private AuthService: AuthService, private fb: FormBuilder) {}
+  @ViewChild('addressForm') addressFormCo: AddressFormComponent;
+
+  constructor(
+    private authService: AuthService,
+    private fb: FormBuilder,
+    private localService: LocalStorageService
+  ) {}
 
   ngOnInit(): void {
     this.userForm = this.fb.group({
-      name: [null, [Validators.required]],
+      fullname: [null, [Validators.required]],
       username: [
         '',
         [Validators.required, Validators.minLength(5)],
-        [CustomAsyncValidators.checkUsername(this.AuthService)],
+        // [CustomAsyncValidators.checkUsername(this.AuthService)],
       ],
-      email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required, Validators.maxLength(10)]],
-      website: ['', Validators.required],
-      address: this.fb.group({
-        street: ['', Validators.required],
-        suite: ['', Validators.required],
-        city: ['', Validators.required],
-        zipcode: ['', Validators.required],
-        geo: this.fb.group({
-          lat: 111111,
-          long: 111111,
-        }),
-      }),
-      company: this.fb.group({
-        name: ['', Validators.required],
-        catchPhrase: ['', Validators.required],
-        bs: this.fb.array([this.fb.control('', [Validators.required])]),
-      }),
+    });
+
+    this.accountForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      retryPassword: ['', [Validators.required, Validators.minLength(8)]],
     });
   }
 
-  get co_bs() {
-    return this.userForm.get('company.bs') as FormArray;
+  checkConfirmPassword() {
+    const password = this.accountForm.get('password').value.trim();
+    const retryPassword = this.accountForm.get('retryPassword').value.trim();
+
+    if (password.length === retryPassword.length) {
+      this.showPasswordError = password !== retryPassword;
+    } else {
+      this.showPasswordError = true;
+    }
   }
 
-  addCo_bs() {
-    this.co_bs.push(this.fb.control('', [Validators.required]));
+  updateStep(step: string) {
+    if (step == 'increase') {
+      this.step += 1;
+    } else {
+      this.step -= 1;
+    }
   }
 
-  deleteCo_bs(index: number) {
-    this.co_bs.removeAt(index);
+  signup() {
+    if (this.accountForm.valid && !this.showPasswordError) {
+      const email = this.accountForm.get('email').value;
+      const password = this.accountForm.get('password').value;
+      this.authService.signup(email, password).subscribe((res) => {
+        if (res) {
+          console.log(res);
+          this.step += 1;
+        }
+      });
+    }
   }
 
-  submitForm() {
-    console.log(this.userForm.get('username'));
+  createUserProfile() {
+    if (this.userForm.valid && this.addressFormCo.addressForm.valid) {
+      const uuid = this.localService.getItem('uuid');
+      const address: IAddress = this.addressFormCo.addressForm.value;
+      const account: IUserAccount = this.accountForm.value;
+      const profile: IUserProfile = {
+        ...this.userForm.value,
+        address: address,
+      };
+      this.authService
+        .createUserProfile(uuid, {
+          account: account,
+          profile: profile,
+        })
+        .subscribe();
+    }
   }
 }
