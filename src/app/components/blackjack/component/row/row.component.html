@@ -11,7 +11,10 @@
     class="col-2 text-white h-100 d-flex align-items-center justify-content-center"
     [ngClass]="player.isDealer ? 'bg-danger' : 'bg-primary'"
   >
-    {{ player.name }}
+    <div class="col-6">
+      {{ player.name }}
+    </div>
+    {{ finalScore }}
   </div>
 
   <!-- <div class="score h-100"> -->

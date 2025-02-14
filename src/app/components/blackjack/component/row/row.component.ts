@@ -26,7 +26,7 @@ import { BlackJackService } from '../../service/blackjack.service';
   templateUrl: './row.component.html',
   styleUrl: './row.component.scss',
 })
-export class RowComponent implements AfterViewInit, OnChanges {
+export class RowComponent implements AfterViewInit, OnInit {
   rowIcon = {
     icon: faSync,
   };
@@ -34,8 +34,8 @@ export class RowComponent implements AfterViewInit, OnChanges {
   result = Result;
   isShowAction: boolean = false;
   isDuringUpdateScore: boolean;
+  finalScore: number;
 
-  @Input() round: number;
   @Input() player: Player;
 
   @Output() sendScore = new EventEmitter<PlayerScorePerRound>();
@@ -51,8 +51,14 @@ export class RowComponent implements AfterViewInit, OnChanges {
     this.isDuringUpdateScore = false;
   }
 
-  ngOnChanges(changes: SimpleChanges): void {}
+  ngOnInit(): void {
+    this.finalScore = this.player.score.reduce(
+      (score, current) => score + current,
+      0
+    );
 
+    console.log('component rerender');
+  }
   ngAfterViewInit(): void {
     this.isDuringUpdateScore = true;
     const lastScoreElement = this.playerScoreRef.last;

@@ -10,6 +10,7 @@ import { NgFor } from '@angular/common';
 import { RowComponent } from './component/row/row.component';
 import { BlackJackService } from './service/blackjack.service';
 import { FormsModule } from '@angular/forms';
+import { ExportToExcel } from './service/export.service';
 
 @Component({
   selector: 'app-blackjack',
@@ -27,7 +28,10 @@ export class BlackJackComponent implements OnInit, AfterViewInit {
 
   @ViewChildren('playerRow') playerRowRef: QueryList<RowComponent>;
 
-  constructor(private blackjackService: BlackJackService) {}
+  constructor(
+    private blackjackService: BlackJackService,
+    private exportService: ExportToExcel
+  ) {}
 
   ngOnInit(): void {
     this.blackjackService.player$.subscribe((players) => {
@@ -144,5 +148,9 @@ export class BlackJackComponent implements OnInit, AfterViewInit {
           ref.isDuringUpdateScore = false;
         }, 100);
       });
+  }
+
+  exportFile() {
+    this.exportService.exportToExcel(this.players);
   }
 }
