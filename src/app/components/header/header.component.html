@@ -10,7 +10,7 @@
       <div class="d-flex justify-content-between col-4">
         <button
           class="btn border text-white shadow bg-dark"
-          [routerLinkActive]="'font-weight-bold'"
+          routerLinkActive="bg-primary"
           [routerLink]="['home']"
         >
           Home
@@ -18,14 +18,14 @@
 
         <button
           class="btn border text-white shadow bg-dark"
-          [routerLinkActive]="'font-weight-bold'"
+          routerLinkActive="bg-primary"
           [routerLink]="['images']"
         >
           Image
         </button>
 
         <button
-          [routerLinkActive]="'font-weight-bold'"
+          routerLinkActive="bg-primary"
           class="btn border text-white shadow bg-dark"
         >
           Todo
@@ -33,26 +33,26 @@
 
         <button
           class="btn border text-white shadow bg-dark"
-          [routerLinkActive]="'font-weight-bold'"
+          routerLinkActive="bg-primary"
           [routerLink]="['']"
-          *ngIf="user; else noUser"
+          *ngIf="!user; else noUser"
         >
-          Sign out
+          Sign in
         </button>
 
         <ng-template #noUser>
           <button
             class="btn border text-white shadow bg-dark"
-            [routerLinkActive]="'font-weight-bold'"
+            routerLinkActive="bg-primary"
             (click)="signout()"
           >
-            Sign in
+            Sign out
           </button>
         </ng-template>
 
         <button
           class="btn border text-white shadow bg-dark"
-          [routerLinkActive]="'font-weight-bold'"
+          routerLinkActive="bg-primary"
           [routerLink]="['blackjack']"
         >
           My Order
@@ -60,7 +60,7 @@
 
         <button
           class="btn border text-white shadow bg-dark"
-          [routerLinkActive]="'font-weight-bold'"
+          routerLinkActive="bg-primary"
           [routerLink]="['cart']"
         >
           <fa-icon [icon]="headerIcon.cart"></fa-icon>

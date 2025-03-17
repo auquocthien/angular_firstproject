@@ -7,6 +7,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { AuthGuard } from '../shared/guard/auth.guard';
 import { SignupComponent } from './components/signup/signup.component';
 import { BlackJackComponent } from './components/blackjack/blackjack.component';
+import { RxjsTestComponent } from './components/rxjs-test/rxjs-test.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent, title: 'Home component' },

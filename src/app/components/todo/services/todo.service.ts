@@ -15,12 +15,10 @@ export class TodoService {
   constructor(
     private httpClient: HttpClient,
     private localService: LocalStorageService
-  ) {
-    this.localId = localService.getItem('uuid');
-    this.idToken = localService.getItem('idToken');
-  }
+  ) {}
 
   getTodos() {
+    this.localId = this.localService.getItem('uuid');
     const url = `${todoUrl}/${this.localId}.json`;
     return this.httpClient.get<{ [key: string]: Todo }>(url).pipe(
       map((todos) => {
@@ -39,6 +37,8 @@ export class TodoService {
   }
 
   addTodo(todo) {
+    this.idToken = this.localService.getItem('idToken');
+
     const url = `${todoUrl}/${this.localId}.json?auth=${this.idToken}`;
 
     return this.httpClient.post(url, todo, {
@@ -49,12 +49,12 @@ export class TodoService {
   }
 
   deleteTodo(id: string) {
-    const url = `${todoUrl}/${this.localId}/${id}.json?auth=${this.idToken}`;
+    const url = `${todoUrl}/${this.localId}/${id}.json`;
     return this.httpClient.delete(url);
   }
 
   updateTodo(id: string, data: { [key: string]: string | boolean }) {
-    const url = `${todoUrl}/${this.localId}/${id}.json?auth=${this.idToken}`;
+    const url = `${todoUrl}/${this.localId}/${id}.json`;
     return this.httpClient.patch(url, data);
   }
 }

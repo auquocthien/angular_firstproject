@@ -1,8 +1,10 @@
 import {
   AfterViewInit,
   Component,
+  ElementRef,
   OnInit,
   QueryList,
+  ViewChild,
   ViewChildren,
 } from '@angular/core';
 import { Player, PlayerScorePerRound } from './model/player.model';
@@ -11,6 +13,7 @@ import { RowComponent } from './component/row/row.component';
 import { BlackJackService } from './service/blackjack.service';
 import { FormsModule } from '@angular/forms';
 import { ExportToExcel } from './service/export.service';
+import * as echarts from 'echarts';
 
 @Component({
   selector: 'app-blackjack',
@@ -18,7 +21,7 @@ import { ExportToExcel } from './service/export.service';
   templateUrl: './blackjack.component.html',
   styleUrl: './blackjack.component.scss',
 })
-export class BlackJackComponent implements OnInit, AfterViewInit {
+export class BlackJackComponent implements OnInit {
   players: Player[] = [];
   newPlayerName: string;
   bet: number = 1;
@@ -27,6 +30,10 @@ export class BlackJackComponent implements OnInit, AfterViewInit {
   playerWillScroll: string;
 
   @ViewChildren('playerRow') playerRowRef: QueryList<RowComponent>;
+  @ViewChild('chartContainer', { static: false })
+  chartContainer!: ElementRef<HTMLDivElement>;
+
+  private chart!: echarts.ECharts;
 
   constructor(
     private blackjackService: BlackJackService,
@@ -40,7 +47,36 @@ export class BlackJackComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    console.log('view init');
+    this.createChart();
+  }
+
+  private createChart() {
+    const chartDom = this.chartContainer.nativeElement;
+    this.chart = echarts.init(chartDom);
+    this.updateChart();
+  }
+
+  private updateChart() {
+    if (!this.chart) return;
+
+    const option = {
+      backgroundColor: '#f5f5f5',
+      title: { text: 'Bảng điểm' },
+      xAxis: { type: 'category', data: this.players.map((p) => p.name) },
+      yAxis: { type: 'value' },
+      series: [
+        {
+          type: 'bar',
+          data: this.players.map((p) => p.score.reduce((sum, s) => sum + s, 0)),
+        },
+      ],
+    };
+
+    this.chart.setOption(option, { notMerge: true });
+  }
+
+  getChartImage(): string {
+    return this.chart.getDataURL({ type: 'png' });
   }
 
   addPlayer() {
@@ -66,6 +102,7 @@ export class BlackJackComponent implements OnInit, AfterViewInit {
         this.round.forEach((player) => {
           this.blackjackService.updatePlayerScore(player);
         });
+        this.updateChart();
         this.reset();
       }, 300);
 
@@ -151,6 +188,7 @@ export class BlackJackComponent implements OnInit, AfterViewInit {
   }
 
   exportFile() {
-    this.exportService.exportToExcel(this.players);
+    this.createChart();
+    this.exportService.exportToExcel(this.players, this.getChartImage());
   }
 }

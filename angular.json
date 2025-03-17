@@ -38,7 +38,8 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              }
+              },
+              "src/assets"
             ],
             "styles": [
               "./node_modules/bootstrap/scss/bootstrap.scss",

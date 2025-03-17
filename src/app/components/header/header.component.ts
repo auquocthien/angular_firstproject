@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { IUser } from '../../../shared/models/user.model';
 import { Store } from '@ngrx/store';
@@ -34,7 +34,8 @@ export class HeaderComponent implements OnInit {
     private store: Store,
     private router: Router,
     private cartService: CartService,
-    private authService: AuthService
+    private authService: AuthService,
+    private cd: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -43,13 +44,14 @@ export class HeaderComponent implements OnInit {
     });
     this.store.select(selectUser).subscribe((user) => {
       if (user) {
-        user = user;
-        this.isSignin = !!user;
+        this.user = user;
+        this.cd.detectChanges();
       }
     });
   }
 
   signout() {
+    this.user = null;
     this.authService.signout();
     this.router.navigate(['']);
   }

@@ -1,30 +1,8 @@
 import { Injectable } from '@angular/core';
-import {
-  IUser,
-  IUserAccount,
-  IUserProfile,
-  UserRole,
-} from '../models/user.model';
-import {
-  BehaviorSubject,
-  catchError,
-  delay,
-  filter,
-  map,
-  Observable,
-  of,
-  switchMap,
-  tap,
-  throwError,
-} from 'rxjs';
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpHeaders,
-  HttpParams,
-} from '@angular/common/http';
+import { IUser } from '../models/user.model';
+import { catchError, Observable, tap, throwError } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
-import * as UserAction from '../../app/store/action/user.action';
 import { IAuthResponse } from '../models/auth.model';
 import { LocalStorageService } from './local-storage.service';
 import { signinUrl, signupUrl, userUrl } from '../../config';

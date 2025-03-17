@@ -1,69 +1,62 @@
-<form [formGroup]="addressForm" [ngClass]="externalClass">
+<!-- <div [ngClass]="externalClass">
   <h4 class="text-center mb-2">{{ "Address" | uppercase }}</h4>
-  <div class="form-group mb-3">
-    <label for="street" class="form-label">Street</label>
-    <input
-      formControlName="street"
-      type="text"
-      class="form-control"
-      id="street"
-      placeholder="Street"
-    />
-  </div>
-  <app-form-error
-    [control]="addressForm.get('street')"
-    [controlName]="'Street'"
-  ></app-form-error>
-  <!-- Suite and City -->
+
   <div class="row mb-2">
     <div class="col-md-6">
-      <div>
-        <label for="suite" class="form-label">Suite</label>
-        <input
-          formControlName="suite"
-          type="text"
-          class="form-control"
-          id="suite"
-          placeholder="Suite"
-        />
-      </div>
-      <app-form-error
-        [control]="addressForm.get('suite')"
-        [controlName]="'Suite'"
-      ></app-form-error>
+      <label for="city" class="form-label">City</label>
+
+      <ng-select
+        [items]="cities"
+        [bindLabel]="'province_name'"
+        [bindValue]="'province_id'"
+        [(ngModel)]="selectedCity"
+        [multiple]="false"
+        [placeholder]="'select city'"
+        (change)="onSelectCity($event)"
+      >
+      </ng-select>
     </div>
     <div class="col-md-6">
       <div>
-        <label for="city" class="form-label">City</label>
-        <input
-          formControlName="city"
-          type="text"
-          class="form-control"
-          id="city"
-          placeholder="City"
-        />
+        <label for="suite" class="form-label">District</label>
+        <ng-select
+          [items]="districts"
+          [bindLabel]="'district_name'"
+          [bindValue]="'district_id'"
+          [(ngModel)]="selectedCity"
+          [multiple]="false"
+          [placeholder]="'select district'"
+          (change)="onSelectDistrict($event)"
+        >
+        </ng-select>
       </div>
-      <app-form-error
-        [control]="addressForm.get('city')"
-        [controlName]="'City'"
-      ></app-form-error>
     </div>
   </div>
 
-  <!-- Zipcode -->
-  <div class="form-group mb-2">
-    <label for="zipcode" class="form-label">Zipcode</label>
-    <input
-      formControlName="zipcode"
-      type="text"
-      class="form-control"
-      id="zipcode"
-      placeholder="Zipcode"
-    />
-    <app-form-error
-      [control]="addressForm.get('zipcode')"
-      [controlName]="'Zipcode'"
-    ></app-form-error>
+  <div class="row">
+    <div class="mb-3 col-md-6">
+      <div>
+        <label for="street" class="form-label">Ward</label>
+        <ng-select
+          [items]="wards"
+          [bindLabel]="'ward_name'"
+          [bindValue]="'ward_id'"
+          [(ngModel)]="selectedCity"
+          [multiple]="false"
+          [placeholder]="'select city'"
+        >
+        </ng-select>
+      </div>
+    </div>
+    <div class="mb-3 col-md-6">
+      <label for="zipcode" class="form-label">Zipcode</label>
+      <input
+        type="text"
+        class="form-control"
+        id="zipcode"
+        placeholder="Zipcode"
+      />
+    </div>
   </div>
   <ng-content></ng-content>
-</form>
+</div> -->

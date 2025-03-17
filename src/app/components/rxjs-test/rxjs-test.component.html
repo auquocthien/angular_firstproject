@@ -1,0 +1,23 @@
+<h2>RxJS Test Component</h2>
+<p>Click trên trang để xem kết quả bên dưới:</p>
+
+<div>
+  <h3>mergeMap (Chạy song song):</h3>
+  <div class="d-flex">
+    <div *ngFor="let log of mergeMapLogs">{{ log }}</div>
+  </div>
+</div>
+
+<div>
+  <h3>switchMap (Hủy trước khi chạy cái mới):</h3>
+  <div class="d-flex">
+    <div *ngFor="let log of switchMapLogs">{{ log }}</div>
+  </div>
+</div>
+
+<div>
+  <h3>concatMap (Chạy tuần tự):</h3>
+  <div class="d-flex">
+    <div *ngFor="let log of concatMapLogs">{{ log }}</div>
+  </div>
+</div>
